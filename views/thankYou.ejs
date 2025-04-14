@@ -1,0 +1,53 @@
+<%- include('header') -%>
+
+<!-- Top Banner -->
+<div class="top-banner">
+    <div class="loc"><a href="/">Home</a></div>
+    <div class="product-top-banner-thank"></div>
+</div>
+
+<!-- Mobile View Buttons -->
+
+<section id="thankyou-page">
+    <div class="thankyou-title container">
+        <div class="thank-text">
+            <img src="/images/Thankyou/thankyou.png">
+        </div>
+    </div>
+    <div class="confirmation text-center">
+        <p>We have recieved your order! </p>
+        <p>Your Order Number is: <span id="cust-order-number" style="color: #132043; font-weight: bold;"><%= order_id %></span></p>
+        <p>We'll be providing you with shipping updates via WhatsApp.</p>
+        <p class="connect-us">For other queries, connect with us on: 
+            <span>
+                <a href="https://www.instagram.com/praiz.co.in/" target="_blank"><i class="fa-brands fa-instagram" style="cursor: pointer; color: #132043; margin-left: .5rem;"></i></a>
+                <a href="https://api.whatsapp.com/send?phone=919899039649" target="_blank"><i class="fa-brands fa-whatsapp" style="cursor: pointer; color: #132043; margin-left: .5rem;"></i></a>
+
+            </span>
+        </p>
+        <p>or send us your queries at: <span style="cursor:- pointer; font-weight: bold;"><a style="color: #132043;" href="mailto:wecare@praiz.co.in">wecare@praiz.co.in</a></span></p>
+    </div>
+
+
+    <!-- <div class="order-dets">
+        <div class="order-dets-inner">
+            <h1 class="summary-head">Order Summary</h1>
+            <div class="order-id">
+                <div class="id-head"></div>
+                <div class="id-number"></div>
+            </div>
+
+            <div class="shipping-add">
+                <div class="shipping-add-head"></div>
+                <div class="shipping-address-dets"></div>
+            </div>
+
+            <div class="query-note">
+                <div class="query-note"></div>
+            </div>
+        </div>
+    </div> -->
+
+</section>
+
+<%- include('footer') -%>

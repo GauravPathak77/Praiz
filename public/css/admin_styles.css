@@ -1,0 +1,167 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-y: hidden;
+  }
+  
+  nav {
+    background-color: #132043;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    color: #fff;
+    padding: 15px;
+    width: 20vw;
+    height: 100vh;
+    overflow: scroll;
+    scrollbar-width: thin;
+  }
+  
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+    border: 2px solid #fff;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  #content {
+    padding: 20px;
+    border: 2px solid goldenrod;
+    border-radius: 5px;
+    width: 85%;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+  }
+  
+  form {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* height: 400px;
+    overflow-y: auto; */
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  input,
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  button {
+    background-color: #FEB215;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 1vw;
+  }
+  
+  button:hover {
+    background-color: #555;
+  }
+  
+  /* Coupons style */
+  #coupons-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+    justify-content: center;
+  }
+  
+  .coupon {
+    background-color: #132043;
+    border-radius: 10px;
+    color: #fff;
+    padding: 10px;
+    width: 300px;
+    height: 100px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .coupon:hover {
+    transform: translateY(-15px);
+  }
+  
+  .coupon-header {
+    text-align: center;
+    margin-bottom: 5px;
+  }
+  
+  .expiry {
+    font-size: 14px;
+    color: #FEB215; /* Gold color */
+  }
+  
+  .discount {
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    background-color: #FEB215; /* Gold color */
+    padding: 5px 5px;
+    border-radius: 5px;
+  }
+
+
+#orderTable{
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  padding: 20px;
+  overflow: scroll;
+}
+#order_Prod_Table{
+  background-color: #cdcccc;
+  padding: 20px;
+  max-height: 40vh;
+  overflow: scroll;
+}
+
+#order_Prod_Table th{
+  background-color: #FEB215;
+  color: white;
+}
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+th {
+    background-color: #132043;
+    color: white;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+tr:hover {
+    background-color: #ddd;
+}

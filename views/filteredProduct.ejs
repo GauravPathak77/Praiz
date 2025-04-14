@@ -1,0 +1,147 @@
+<%- include('header') -%>
+
+    <!-- Mobile View Buttons -->
+
+    <!-- Top Banner -->
+    <div class="top-banner">
+        <div class="loc"><a href="/">Home</a> / <a href="#" id="filter_nav_loc"><%= style %></a></div>
+        <div id="filter-banner" class="product-top-banner-filter" style="background-repeat: no-repeat; background-size: cover;">
+            <img src="">
+        </div>
+    </div>
+
+
+    <section id="products" class="products">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="headline text-center">
+                        <!-- <h2 class="pb-2 position-relative d-inline-block">Featured Products</h2> -->
+                    </div>
+                </div>
+            </div>
+            <div class="row featured-product">
+
+                <% if(Products){ %>
+                    <% Products.forEach(product=> { %>
+                            <div class="col-6 col-sm-6 col-lg-4 col-xl-3">
+                                <a href="/product/<%= product.slug %>">
+                                    <% if(product.quantity===0){ %>
+                                            <div class="product-card soldout">
+                                        <% } else { %>
+                                            <div class="product-card">
+                                        <% } %>
+
+                                        <div class="product-img">
+
+                                            <span class="discount-tag" style="opacity: 0;">
+                                                <%= product.discount %>% off
+                                            </span>
+
+                                            <img src="<%= product.thumbnail %>" class="product-thumb"
+                                                alt="similar-product">
+                                            <img src="<%= product.images[0] %>" alt="similar-product-s"
+                                                class="img-fluid product-thumb-s">
+                                        </div>
+                                </a>
+                                <div class="product-info">
+                                    <div class="card-dets">
+                                        <a href="/product/<%= product.slug %>">
+                                                    <div class="product-name">
+                                                        <%= product.title %>
+                                                    </div>
+                                        </a>
+                                        <div class="product-price">&#8377 <%= product.sellingPrice %></span>
+                                                <span class="product-price"><del>&#8377 <%= product.price %>
+                                                    </del></span>
+                                        </div>
+
+                                        <div class="py-1">
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-big-btn">
+                                        <% if(user){ %>
+                                            <% if(product.quantity===0){ %>
+                                                <button type="button"
+                                                    class="btn btn-outline-primary card-btn add-to-cart"
+                                                    disabled>Add to Cart</button>
+                                                <% }else{ %>
+                                                    <button type="button"
+                                                        class="btn btn-outline-primary card-btn add-to-cart"
+                                                        onclick="add_to_cart('<%= product._id %>', '<%= product.slug %>', '<%= product.title %>', '<%= product.images[0] %>', '<%= product.quantity %>', '<%= product.price %>', '<%= product.sellingPrice %>', '<%= product.discount %>', '<%= product.color %>', '<%= user.refreshToken %>')">Add
+                                                        to Cart
+                                                        <i class="d-inline d-sm-none fa-solid fa-cart-shopping" style="color: #ffffff;"></i>
+                                                    </button>
+                                                    <% } %>
+                                                        <% } else { %>
+                                                            <% if(product.quantity===0){ %>
+                                                                <button type="button"
+                                                                    class="btn btn-outline-primary card-btn add-to-cart"
+                                                                    disabled>Add to Cart</button>
+                                                                <% }else{ %>
+                                                                    <button type="button"
+                                                                        class="btn btn-outline-primary card-btn add-to-cart"
+                                                                        onclick="add_to_cart('<%= product._id %>', '<%= product.slug %>', '<%= product.title %>', '<%= product.images[0] %>', '<%= product.quantity %>', '<%= product.price %>', '<%= product.color %>', '-1')">Add
+                                                                        to Cart</button>
+                                                                    <% } %>
+                                                                        <% } %>
+                                                                            <button type="button"
+                                                                                class="wishlist-button-small add-to-wish"
+                                                                                onclick="add_to_wishlist('<%= product._id %>', '<%= user.id %>')">
+                                                                                <i
+                                                                                    class="fa-regular fa-heart"></i>
+                                                                            </button>
+                                                                            <button type="button"
+                                                                                class="card-btn wishlist-button-small-mob btn btn-outline-primary add-to-wish"
+                                                                                onclick="add_to_wishlist('<%= product._id %>', '<%= user.id %>')"><i class="fa-regular fa-heart" style="color: #132043;font-size: .9rem;" aria-hidden="true"></i></button>
+                                    </div>
+                                </div>
+
+                            </div>
+            </div>
+            <% }) } %>
+
+
+        </div>
+        <!-- Lower Banner -->
+            <div class="row">
+                <div class="lower-hashtag">
+                    <div class="lower-hashtag-inner">
+                        <div class="col-sm-6 col-lg-6 quote text-center">
+                            <div class="hashtag-section">
+                                <img src="/images/Banner/Lower Banner 2/lower.webp" alt="hashtag"
+                                    class="hashtag-image">
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-6 sign-up">
+                            <div class="sign-up-right">
+                                <h2>Join us for regular updates</h2>
+                                <p>Join the <b>Praiz</b> community to receive exclusive early access to sales,
+                                    new collections and more. Plus you'll get 10% off your first order.
+                                </p>
+                                <div class="sign-up-section">
+                                    <form id="emailForm">
+                                    <div class="email-box">
+                                        <input type="email" id="emailInput" name="emai-id"
+                                            placeholder="Enter your email">
+                                    </div>
+                                    <div class="sign-up-button">
+                                        <button type="button" class="btn btn-success">Sign Up</button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+
+    <!-- Footer -->
+    <%- include('footer') -%>

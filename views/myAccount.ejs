@@ -1,0 +1,563 @@
+<%- include('header') -%>
+
+
+    <!-- Top Banner -->
+    <div class="top-banner">
+        <div class="loc"><a href="/">Home</a><a href=""></a></div>
+        <div class="cart-banner"></div>
+    </div>
+
+
+    <!-- Mobile View Buttons -->
+    <div class="mob-account-opt d-block d-sm-none">
+        <div class="menu-row">
+            <div class="option mob-option-1"><a href="" onclick="return false;" style="color: black;">Order History</a>
+            </div>
+            <div class="option mob-option-2"><a href="" onclick="return false;" style="color: black;">Praiz Coins</a>
+            </div>
+        </div>
+        <div class="menu-row">
+            <div class="option mob-option-3"><a href="" onclick="return false;" style="color: black;">Address</a></div>
+            <div class="option mob-option-4"><a href="" onclick="return false;" style="color: black;">My Profile</a></div>
+            <div class="option mob-option-4"><a href="/user/logout" style="color: black;">Logout</a></div>
+        </div>
+
+        <div class="order-history">
+            <% if(Products){ %>
+                <% Products.forEach((product, index) => { %>
+            <div class="card">
+
+                    <!-- Rating start -->
+                <div id="ratingModal" class="modal">
+                    <div class="modal-content">
+                      <span class="close">&times;</span>
+                      <h2>Rate This Product</h2>
+                      <div id="starRating">
+                        <i class="far fa-star star" data-rating="1"></i>
+                        <i class="far fa-star star" data-rating="2"></i>
+                        <i class="far fa-star star" data-rating="3"></i>
+                        <i class="far fa-star star" data-rating="4"></i>
+                        <i class="far fa-star star" data-rating="5"></i>
+                      </div>
+                      <div class="input-group">
+                        <label for="ratingValue">Rating:</label>
+                        <input type="text" id="ratingValue" readonly>
+                      </div>
+                      <button id="submitBtn" class="blue-btn" onclick="setRatings('<%= product._id %>')">Submit</button>
+                      <button id="closeBtn" class="brown-btn">Close</button>
+                    </div>
+                  </div>
+                    <!-- Rating End -->
+
+                <a href="/product/<%= product.slug %>" style="text-decoration: none; color: #000000;">
+                <div class="card-flex">
+                    <img src="<%= product.image %>" class="card-img-top" alt="ordered">
+                    <div class="card-inner">
+                        <div class="card-body">
+                            <h6><%= product.title %></h6>
+                            <div class="product-color" style="line-height: normal;">Colour: <%= product.color %></div>
+                            <div class="product-size" style="line-height: normal;">Size: adjustable</div>
+                            <div class="current-status" style="line-height: normal;">Current Status: <%= product.orderStatus %></div>
+                        </div>
+                        <div class="product-price"> &#8377 <%= product.sellingPrice %></div>
+                    </div>
+                </div>
+            </a>
+                <div class="mob-card-buttons">
+                    <a class="btn btn-primary rateBtn">Rate it</a>
+                    <a href="" class="btn btn-primary">Download Invoice</a>
+                </div>
+            </div>
+            <% }) %>
+            <% } else { %>
+                <div class="card">
+                    <div class="card-inner" style="margin: 4vw 0;">
+                        <h6>Empty...</h6>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+
+        <!-- <div class="praiz-coins" style="height: 4vw;">
+            <h6>Coming Soon....</h6>
+            <span class="coin-balance">58 </span><span style="font-size: 1rem;">Coins Available</span>
+            <hr width="100%">
+            <h6 class="redeem-coin">Redeem Coins:</h6>
+
+            <div class="code-check mb-2">Enter you code to redeem Praiz Coins</div>
+            <div class="code-input">
+                <form class="form-inline">
+                    <div class="form-group mb-2">
+                        <input type="text" placeholder="Enter your Code" class="form-control-plaintext" id="praizcode">
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                </form>
+                <div class="alert alert-success" role="alert">
+                    Your code was <b>accepted!</b> You recieved <b>5</b> coins.
+                </div>
+                <div class="alert alert-danger" role="alert">
+                    Oops! This code is <b>not</b> valid. Please try again.
+                </div>
+                <div class="alert alert-warning" role="alert">
+                    This code has <b>already been used</b> before! Try a different one.
+                </div>
+            </div> -->
+        <!-- </div> -->
+
+        <div class="address-book address-book-xs">
+            <div class="xs-address-card-tiles">
+                <div class="Acard xs-address-card">
+                    <div class="new-address">
+                        <span> &#43;</span><!-- <i class="fa-solid fa-plus" style="color: #d1d1d1;"></i> -->
+                    </div>
+                </div>
+                <div id="address-label">New Address</div>
+
+                <div class="Acard xs-address-card">
+                    <div class="address">
+                        <span>Home</span>
+                        <i class="fa-solid fa-plus" style="color: #d1d1d1;"></i>
+                    </div>
+                </div>
+                <div id="address-label">Home</div>
+
+                <div class="Acard xs-address-card">
+                    <div class="address">
+                        <span> Office</span>
+                        <i class="fa-solid fa-plus" style="color: #d1d1d1;"></i>
+                    </div>
+                </div>
+                <div id="address-label">Office</div>
+            </div>
+
+            <form class="address-form-xs" onsubmit="check_address('<%= user._id %>'); event.preventDefault();">
+                <!-- 2 column grid layout with text inputs for the first and last names -->
+                <h1 class="new-address-heading-xs">Add New Address</h1>
+                <div class="row mb-1">
+                    <div class="col">
+                        <div data-mdb-input-init class="form-outline">
+                            <input type="text" id="firstname" class="form-control" required/>
+                            <label class="form-label" for="form6Example1">First name</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div data-mdb-input-init class="form-outline">
+                            <input type="text" id="lastname" class="form-control" required/>
+                            <label class="form-label" for="form6Example2">Last name</label>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Text input -->
+                <div data-mdb-input-init class="form-outline mb-1">
+                    <input type="text" id="address1" class="form-control" required/>
+                    <label class="form-label" for="form6Example3">Address Line 1</label>
+                </div>
+    
+                <!-- Text input -->
+                <div data-mdb-input-init class="form-outline mb-1">
+                    <input type="text" id="address2" class="form-control" required/>
+                    <label class="form-label" for="form6Example4">Address Line 2 (Optional)</label>
+                </div>
+    
+                <div class="row mb-1">
+                    <div class="col">
+                        <div data-mdb-input-init class="form-outline">
+                            <input type="number" id="pin_code" class="form-control" required/>
+                            <label class="form-label" for="form6Example1">Pin Code</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div data-mdb-input-init class="form-outline">
+                            <input type="number" id="phone_no" class="form-control" required/>
+                            <label class="form-label" for="form6Example2">Phone No.</label>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="row mb-1">
+                    <div class="col">
+                        <div data-mdb-input-init class="form-outline">
+                            <input type="text" id="title" class="form-control"
+                                placeholder="Home / Office / Others" required/>
+                            <label class="form-label" for="form6Example1">Name this Address</label>
+                        </div>
+    
+                    </div>
+                    <div class="col d-none d-lg-block">
+                        <button data-mdb-ripple-init type="submit"
+                            class="submit-btn btn btn-primary btn-block mb-4">Submit</button>
+                        <button data-mdb-ripple-init type="button"
+                            class="back-btn btn btn-primary btn-block mb-4">Back</button>
+    
+                    </div>
+                </div>
+    
+                <div class="xs-buttons row mb-1 ml-4 d-xs-none d-md-block d-lg-none">
+                    <button data-mdb-ripple-init type="submit"
+                        class="submit-btn btn btn-primary btn-block mb-4">Submit</button>
+                    <button data-mdb-ripple-init type="button"
+                        class="back-btn btn btn-primary btn-block mb-4">Back</button>
+                </div>
+    
+                <div id="address_alert" class="alert-text-danger"></div>
+                <div id="address_submit" class="alert-text-success"></div>
+            </form>
+
+        </div>
+
+        <div class="my-account">
+            <div class="my-account-inner">
+                <ul>
+                    <form action="/user/updateProfile" method="post">
+                    <li class="info">
+                        <div class="info-inner" style="display: flex;">
+                            <span>First Name: </span>
+                            <span class="user-data" id="user-name"><%= user.firstname %></span>
+                            <input type="text" name="field" value="firstname" style="opacity: 0; width: 0px;">
+                            <input type="text" name="data">
+                        </div>
+                        <div class="edit-btn"><button class="btn btn-primary" type="button">Edit</button></div>
+                        <div class="submit-btn"><button class="btn btn-primary" type="submit">Submit</button></div>
+                    </li>
+                </form>
+
+                <form action="/user/updateProfile" method="post">
+                    <li class="info">
+                        <div class="info-inner">
+                            <span>Last Name: </span>
+                            <span class="user-data" id="user-name"><%= user.lastname %></span>
+                            <input type="text" name="field" value="lastname" style="opacity: 0; width: 0px;">
+                            <input type="text" name="data">
+                        </div>
+                        <div class="edit-btn"><button class="btn btn-primary" type="button">Edit</button></div>
+                        <div class="submit-btn"><button class="btn btn-primary" type="submit">Submit</button></div>
+                    </li>
+                </form>
+
+                <form action="/user/updateProfile" method="post">
+                    <li class="info">
+                        <div class="info-inner">
+                            <span>E-mail Id: </span>
+                            <span class="user-data" id="user-email"><%= user.email %></span>
+                            <input type="text" name="field" value="email" style="opacity: 0; width: 0px;">
+                            <input type="email" name="data">
+                        </div>
+                        <div class="edit-btn"><button class="btn btn-primary" type="button">Edit</button></div>
+                        <div class="submit-btn"><button class="btn btn-primary" type="submit">Submit</button></div>
+                    </li>
+                </form>
+
+                <form action="/user/updateProfile" method="post">
+                    <li class="info">
+                        <div class="info-inner">
+                            <span>Phone No: </span>
+                            <span class="user-data" id="user-ph"><%= user.mobile %></span>
+                            <input type="text" name="field" value="mobile" style="opacity: 0; width: 0px;">
+                            <input type="number" name="data">
+                        </div>
+                        <div class="edit-btn"><button class="btn btn-primary" type="button">Edit</button></div>
+                        <div class="submit-btn"><button class="btn btn-primary" type="submit">Submit</button></div>
+                    </li>
+                    </form>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+
+    <section id="myAccount" class="d-none d-sm-block">
+        <div class="menu-container">
+            <div class="account-side-menu option1">
+                <ul class="option-list">
+                    <div class="option option-1">
+                        <li><i class="icon fa-solid fa-cart-shopping" style="color: #000000;"></i>Order
+                            History</li>
+                        <i class="arrow fa-solid fa-caret-right" style="color: #000000;"></i>
+                    </div>
+                    <!-- <div class="option option-2">
+                        <li><i class="icon fa-solid fa-coins"></i>Praiz Coins</li>
+                        <i class="arrow fa-solid fa-caret-right" style="color: #000000;"></i>
+                    </div> -->
+                    <div class="option option-3">
+
+                        <li><i class="icon fa-solid fa-house" style="color: #000000;"></i>Address</li>
+                        <i class="arrow fa-solid fa-caret-right" style="color: #000000;"></i>
+                    </div>
+                    <div class="option option-4">
+
+                        <li><i class="icon fa-solid fa-user" style="color: #000000;"></i>My Profile
+                        </li>
+                        <i class="arrow fa-solid fa-caret-right" style="color: #000000;"></i>
+                    </div>
+                    <a href="/user/logout" style="color: black;">
+                    <div class="option option-5">
+                        <li><i class="icon fa-solid fa-right-from-bracket" style="color: #000000;"></i>Logout
+                        </li>
+                        <i class="arrow fa-solid fa-caret-right" style="color: #000000;"></i>
+                    </div>
+                </a>
+                </ul>
+            </div>
+
+            <!-- Order History  -->
+            <div class="order-history">
+                <h4 class="mb-4">Order History</h4>
+           
+                <% if(Products){ %>
+                    <% Products.forEach((product) => { %>
+                <div class="card">
+
+                    <!-- Rating start -->
+                <div id="ratingModal2" class="modal2">
+                    <div class="modal-content2">
+                      <span class="close2">&times;</span>
+                      <h2>Rate This Product</h2>
+                      <div id="starRating">
+                        <i class="far fa-star star2" data-rating="1"></i>
+                        <i class="far fa-star star2" data-rating="2"></i>
+                        <i class="far fa-star star2" data-rating="3"></i>
+                        <i class="far fa-star star2" data-rating="4"></i>
+                        <i class="far fa-star star2" data-rating="5"></i>
+                      </div>
+                      <div class="input-group2">
+                        <label for="ratingValue2">Rating:</label>
+                        <input type="text" id="ratingValue2" readonly>
+                      </div>
+                      <button id="submitBtn2" class="blue-btn2" onclick="setRatings('<%= product._id %>')">Submit</button>
+                      <button id="closeBtn2" class="brown-btn2">Close</button>
+                    </div>
+                  </div>
+                    <!-- Rating End -->
+
+                    <a href="/product/<%= product.slug %>" style="text-decoration: none; color: #000000;">
+                    <img src="<%= product.image %>" class="card-img-top" alt="ordered">
+                    </a>
+                    <div class="card-inner">
+                        <div class="card-body">
+                            <h6><%= product.title %></h6>
+                            <div class="product-color" style="line-height: normal;">Colour: <%= product.color %></div>
+                            <div class="product-size" style="line-height: normal;">Size: adjustable</div>
+                            <div class="current-status" style="line-height: normal;">Current Status: <%= product.orderStatus %></div>
+                        </div>
+                        <div class="product-price"> &#8377 <%= product.sellingPrice %></div>
+                        <div class="card-buttons">
+                            <a class="btn btn-primary rateBtn">Rate it</a>
+
+                            <a href="" class="btn btn-primary">Download Invoice</a>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+            <% } else { %>
+                <div class="card"></div>
+            <% } %>
+
+
+            </div>
+            <!-- Praiz Coins  -->
+            <!-- <div class="praiz-coins">
+                <h4 class="mb-3">Praiz Coins</h4>
+                <div class="coin-inner">
+                    <div class="left-side">
+                        <h6 class="available-coin">Available Coins:</h6>
+                        <span class="coin-balance">58 </span><span style="font-size: 1rem;">Coins Available</span>
+                        <hr width="100%">
+                        <h6 class="redeem-coin">Redeem Coins:</h6>
+
+                        <div class="code-check mb-2">Enter you code to redeem Praiz Coins</div>
+                        <div class="code-input">
+                            <form class="form-inline">
+                                <div class="form-group mb-2">
+                                    <input type="text" placeholder="Enter your Code" class="form-control-plaintext"
+                                        id="praizcode">
+                                </div>
+                                <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                            </form>
+                            <div class="alert alert-success" role="alert">
+                                Your code was <b>accepted!</b> You recieved <b>5</b> coins.
+                            </div>
+                            <div class="alert alert-danger" role="alert">
+                                Oops! This code is <b>not</b> valid. Please try again.
+                            </div>
+                            <div class="alert alert-warning" role="alert">
+                                This code has <b>already been used</b> before! Try a different one.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="right-side">
+                        <img src="/images/Register//images/scratch1.png" class="card-img" alt="scratch-card">
+                    </div>
+                </div>
+            </div> -->
+            <!-- Address Book  -->
+            <div class="address-book address-book-lg">
+                <h4 class="mb-3 address-heading">Address</h4>
+                <div class="address-card lg-address-card-tiles">
+                    <div class="Acard lg-address-card">
+                        <div class="new-address">
+                            <span> &#43;</span><!-- <i class="fa-solid fa-plus" style="color: #d1d1d1;"></i> -->
+                        </div>
+                    </div>
+
+                    <!-- <div class="Acard lg-address-card">
+                        <div class="address">
+                            <span
+                                class="address-name">Home</span> -->
+                                <!-- <i class="fa-solid fa-plus" style="color: #d1d1d1;"></i> -->
+                        <!-- </div>
+                    </div> -->
+
+                    <!-- <div class="Acard lg-address-card">
+                        <div class="address">
+                            <span class="address-name">
+                                Office</span> -->
+                                <!-- <i class="fa-solid fa-plus" style="color: #d1d1d1;"></i> -->
+                        <!-- </div>
+                    </div> -->
+
+                </div>
+                <form class="address-form" onsubmit="check_address('<%= user._id %>'); event.preventDefault();">
+                    <!-- 2 column grid layout with text inputs for the first and last names -->
+                    <h1 class="new-address-heading">Add New Addres</h1>
+                    <div class="row mb-1">
+                        <div class="col">
+                            <div data-mdb-input-init class="form-outline">
+                                <input type="text" id="form6Example1" class="form-control" name="firstname" required/>
+                                <label class="form-label" for="form6Example1">First name</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div data-mdb-input-init class="form-outline">
+                                <input type="text" id="form6Example2" class="form-control" name="lastname" required/>
+                                <label class="form-label" for="form6Example2">Last name</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input -->
+                    <div data-mdb-input-init class="form-outline mb-1">
+                        <input type="text" id="form6Example3" class="form-control" name="address1" required/>
+                        <label class="form-label" for="form6Example3">Address Line 1</label>
+                    </div>
+
+                    <!-- Text input -->
+                    <div data-mdb-input-init class="form-outline mb-1">
+                        <input type="text" id="form6Example4" class="form-control" name="address2"/>
+                        <label class="form-label" for="form6Example4">Address Line 2 (Optional)</label>
+                    </div>
+
+                    <div class="row mb-1">
+                        <div class="col">
+                            <div data-mdb-input-init class="form-outline">
+                                <input type="number" id="form6Example1" class="form-control" name="pin_code" required/>
+                                <label class="form-label" for="form6Example1">Pin Code</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div data-mdb-input-init class="form-outline">
+                                <input type="number" id="form6Example2" class="form-control" name="phone_no" required/>
+                                <label class="form-label" for="form6Example2">Phone No.</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-1">
+                        <div class="col">
+                            <div data-mdb-input-init class="form-outline">
+                                <input type="text" id="form6Example1" class="form-control"
+                                    placeholder="Home / Office / Others" name="title" required/>
+                                <label class="form-label" for="form6Example1">Name this Address</label>
+                            </div>
+
+                        </div>
+                        <div class="col d-none d-lg-block">
+                            <button data-mdb-ripple-init type="submit"
+                                class="submit-btn btn btn-primary btn-block mb-4">Submit</button>
+                            <button data-mdb-ripple-init type="button"
+                                class="back-btn btn btn-primary btn-block mb-4">Back</button>
+
+                        </div>
+                    </div>
+
+                    <div class="row mb-1 ml-4 d-none d-md-block d-lg-none">
+                        <button data-mdb-ripple-init type="submit"
+                            class="submit-btn btn btn-primary btn-block mb-4">Submit</button>
+                        <button data-mdb-ripple-init type="button"
+                            class="back-btn btn btn-primary btn-block mb-4">Back</button>
+                    </div>
+
+                    <div id="address_alert" class="alert-text-danger" style="color: red;"></div>
+                    <div id="address_submit" class="alert-text-success"></div>
+                </form>
+
+            </div>
+            <!-- My Profile  -->
+            <div class="my-account">
+                <h4 class="mb-3">My Account</h4>
+                <div class="my-account-inner">
+                    <ul>
+                        <form action="/user/updateProfile" method="post">
+                        <li class="info">
+                            <div class="info-inner" style="display: flex;">
+                                <span>First Name: </span>
+                                <span class="user-data" id="user-name"><%= user.firstname %></span>
+                                <input type="text" name="field" value="firstname" style="opacity: 0; width: 0px;">
+                                <input type="text" name="data">
+                            </div>
+                            <div class="edit-btn"><button class="btn btn-primary" type="button">Edit</button></div>
+                            <div class="submit-btn"><button class="btn btn-primary" type="submit">Submit</button></div>
+                        </li>
+                    </form>
+    
+                    <form action="/user/updateProfile" method="post">
+                        <li class="info">
+                            <div class="info-inner">
+                                <span>Last Name: </span>
+                                <span class="user-data" id="user-name"><%= user.lastname %></span>
+                                <input type="text" name="field" value="lastname" style="opacity: 0; width: 0px;">
+                                <input type="text" name="data">
+                            </div>
+                            <div class="edit-btn"><button class="btn btn-primary" type="button">Edit</button></div>
+                            <div class="submit-btn"><button class="btn btn-primary" type="submit">Submit</button></div>
+                        </li>
+                    </form>
+    
+                    <form action="/user/updateProfile" method="post">
+                        <li class="info">
+                            <div class="info-inner">
+                                <span>E-mail Id: </span>
+                                <span class="user-data" id="user-email"><%= user.email %></span>
+                                <input type="text" name="field" value="email" style="opacity: 0; width: 0px;">
+                                <input type="email" name="data">
+                            </div>
+                            <div class="edit-btn"><button class="btn btn-primary" type="button">Edit</button></div>
+                            <div class="submit-btn"><button class="btn btn-primary" type="submit">Submit</button></div>
+                        </li>
+                    </form>
+    
+                    <form action="/user/updateProfile" method="post">
+                        <li class="info">
+                            <div class="info-inner">
+                                <span>Phone No: </span>
+                                <span class="user-data" id="user-ph"><%= user.mobile %></span>
+                                <input type="text" name="field" value="mobile" style="opacity: 0; width: 0px;">
+                                <input type="number" name="data">
+                            </div>
+                            <div class="edit-btn"><button class="btn btn-primary" type="button">Edit</button></div>
+                            <div class="submit-btn"><button class="btn btn-primary" type="submit">Submit</button></div>
+                        </li>
+                        </form>
+    
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+<!-- Footer -->
+<%- include('footer') -%>

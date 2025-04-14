@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/admin_styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <!-- <script src="/ckeditor5/ckeditor.js"></script> -->
+  <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
+  <script src="https://cdn.ckbox.io/ckbox/2.4.0/ckbox.js"></script>
+  <link rel="stylesheet" href="https://cdn.ckbox.io/ckbox/2.4.0/styles/themes/lark.css">
+  <title>Admin Panel</title>
+</head>
+<body>
+  <nav>
+    <a href="#" onclick="openRoute('addProduct')" class="admin">Add Product</a>
+    <a href="#" onclick="openRoute('updateImages')" class="admin">Update Images</a>
+    <a href="#" onclick="openRoute('updateProduct')" class="admin">Update Product</a>
+    <a href="#" onclick="openRoute('removeProduct')" class="admin">Remove Product</a>
+    <a href="#" onclick="openRoute('getProductById')" class="admin">Get Product by ID</a>
+    <a href="/product/" onclick="openRoute('getAllProducts')" class="admin">Get All Products</a>
+    <a href="#" onclick="openRoute('setStyle')" class="admin">Set Style</a>
+    <a href="#" onclick="openRoute('blockUser')" class="admin">Block User</a>
+    <a href="#" onclick="openRoute('unblockUser')" class="admin">Unblock User</a>
+    <!-- Blog Start -->
+    <!-- <div class="dropdown"> -->
+      <a class="dropdown-toggle admin" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        Blog
+      </a>
+    
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <li><a class="dropdown-item" href="/blog/create_blog" onclick="openRoute('createBlog')">Create Blog</a></li>
+        <li><a class="dropdown-item" href="#" onclick="openRoute('updateBlog')">Update Blog</a></li>
+        <li><a class="dropdown-item" href="#" onclick="openRoute('getBlog')">Get Blog</a></li>
+      </ul>
+    <!-- </div> -->
+    <!-- Blog End -->
+
+    <!-- Order Start -->
+    <!-- <div class="dropdown"> -->
+      <a class="dropdown-toggle admin" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        Order
+      </a>
+    
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <li><a class="dropdown-item" href="#" onclick="openRoute('getOrders')">Get Orders</a></li>
+        <li><a class="dropdown-item" href="#" onclick="openRoute('updateOrderStatus')">Update Order Status</a></li>
+      </ul>
+    <!-- </div> -->
+    <!-- Order End -->
+
+    <a href="#" onclick="openRoute('userTracking')" class="admin">User Tracking</a>
+    <a href="#" onclick="openRoute('productTracking')" class="admin">Product Tracking</a>
+    <!-- <a href="#" onclick="openRoute('productTracking')" > -->
+
+      <!-- Coupon Start -->
+    <!-- <div class="dropdown"> -->
+      <a class="dropdown-toggle admin" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        Coupon
+      </a>
+    
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <li><a class="dropdown-item" href="#" onclick="openRoute('createCoupon')">Create coupon</a></li>
+        <li><a class="dropdown-item" href="#" onclick="openRoute('getAllCoupon')">Get all coupon</a></li>
+        <li><a class="dropdown-item" href="#" onclick="openRoute('deleteCoupon')">Delete coupon</a></li>
+      </ul>
+    <!-- </div> -->
+    <!-- Coupon End -->
+
+      <!-- <a href="#" onclick="openRoute('couponAction')" class="admin">
+      <select id="coupon" value="Coupon">
+        <option name="coupon_title">Coupon</option>
+        <option name="create_coupon" id="create_coupon" value="createCoupon" onclick="openRoute('createCoupon')">Create coupon</option>
+        <option name="get-all_coupon" id="get-all_coupon" value="getCoupon" onclick="openRoute('getAllCoupon')">Get all coupon</option>
+        <option name="delete_coupon" id="delete_coupon" value="deleteCoupon" onclick="openRoute('deleteCoupon')">Delete coupon</option>
+      </select>
+    </a> -->
+    <!-- </a> -->
+  </nav>
+  
+
+  <section id="content">
+    PRAIZ
+    <!-- Content will be dynamically loaded here -->
+    <div id="coupons-container"></div>
+  </section>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

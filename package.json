@@ -1,0 +1,51 @@
+{
+  "name": "praiz",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start:dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "postcss public/styles/tailwind.css -o public/styles/style.css",
+    "watch:css": "nodemon -e js,ejs,css -x \"npm run build:css\"",
+    "dev": "concurrently \"npm run start:dev\" \"npm run watch:css\""
+  },
+  "author": "Praiz",
+  "license": "ISC",
+  "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^41.2.1",
+    "@ckeditor/ckeditor5-indent": "^41.3.0",
+    "@prismicio/client": "^7.4.0",
+    "autoprefixer": "^10.4.19",
+    "axios": "^1.6.8",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cloudinary": "^1.41.1",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "google-search-results-nodejs": "^2.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.4.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "node-fetch": "^3.3.2",
+    "path": "^0.12.7",
+    "postcss": "^8.4.38",
+    "postcss-cli": "^11.0.0",
+    "razorpay": "^2.9.3",
+    "sharp": "^0.33.1",
+    "slugify": "^1.6.6",
+    "uniqid": "^5.4.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.1.1",
+    "tailwindcss": "^3.4.4"
+  },
+  "keywords": [],
+  "description": ""
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
+        <script src="https://cdn.ckbox.io/ckbox/2.4.0/ckbox.js"></script>
+        <link rel="stylesheet" href="https://cdn.ckbox.io/ckbox/2.4.0/styles/themes/lark.css">
+        <style>
+            input {
+                padding: 0.5vw;
+                margin: 0.5vw;
+                font-size: 1vw;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 style="text-align: center;">Create Blog</h1>
+        <form action="/blog/saveBlog" method="post" style="display: flex; flex-direction: column; max-width: 60vw; margin: auto auto; padding: 2vw;">
+        <label for="title">Title: </label>
+        <input type="text" name="title" id="title">
+        <label for="category">Category:</label>
+        <input type="text" name="category" id="category">
+        <label for="images">Thumbnail:</label>
+        <input type="text" name="images" id="images">
+        <label for="description">Description: </label>
+        <textarea id="editor" name="description"></textarea>
+        <button id="submit" style="width: 5vw;">Create</button>
+        </form>
+        <script>
+            ClassicEditor
+                .create( document.querySelector( '#editor' ), {
+                    ckbox: {
+                        tokenUrl: 'https://108126.cke-cs.com/token/dev/LiKxR2xEW8opQewRr142RHmdFNXCQgamEYmf?limit=10',
+                        theme: 'lark'
+                    },
+                    toolbar: [
+                        'ckbox', 'imageUpload', '|', 'heading', '|', 'undo', 'redo', '|', 'bold', 'italic', '|',
+                        'blockQuote', 'outdent', 'indent', 'link', '|', 'bulletedList', 'numberedList'
+                    ],
+                } )
+                .catch( error => {
+                    console.error( error );
+                } );
+        </script>
+    </body>
+</html>

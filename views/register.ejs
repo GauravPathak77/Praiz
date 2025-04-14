@@ -1,0 +1,230 @@
+<%- include('header') -%>
+
+    <!-- Mobile View Buttons -->
+
+    <!-- Main Content -->
+    
+    <section id="register">
+        <!-- <div class="form-container">
+            <div class="reg-img"></div>
+            <div class="reg-form">
+
+            </div>
+        </div> -->
+        <div class="container py-5 h-100" style="margin-top: 5rem;">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-xl-10">
+                    <div class="card">
+                        <div class="row g-0">
+                            <div class="reg-img col-md-6 col-lg-6 d-none d-md-none d-xl-block d-lg-block">
+                                <img src="/images/Register/img/reg.webp" alt="login form" class="img-fluid">
+                            </div>
+                            <div class="reg-img col-md-6 col-lg-6 d-none d-md-block d-xl-none d-lg-none">
+                                <img src="/images/Register/img/reg.webp" alt="login form" class="img-fluid">
+                            </div>
+                            <div class="col-md-6 col-lg-6 d-flex align-items-center">
+                                <div class="card-body p-4 p-lg-5 text-black">
+
+                                    <!-- <form> -->
+                                        <div class="choose-way s-login">
+                                            <ul>
+                                                <li class="sign-in active">
+                                                    <a>Sign In</a>
+                                                </li>
+                                                <li class="sign-up">
+                                                    <a>Register</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <!-- Login start --> 
+                                <div id="login-email" class="login-form">
+                                    <form action="/user/login" method="post">
+                                    <!-- <div class="accounts" style="display: flex;">
+                                        <h5 class="fw-normal mb-2 pb-2" style="letter-spacing: 1px;">Sign in
+                                            with:
+                                        </h5>
+                                        <i class="fa-brands fa-facebook"></i>
+                                        <i class="fa-brands fa-twitter"></i>
+                                        <i class="fa-brands fa-google"></i>
+                                    </div> -->
+
+                                    <!-- <div class="divider">
+                                        <h5>or</h5>
+                                    </div> -->
+
+                                    <div class="form-outline mb-1">
+                                        <input type="email" id="form2Example18"
+                                            class="form-control form-control-lg" name="email" />
+                                        <label class="form-label" for="form2Example18">Email address</label>
+                                    </div>
+
+                                    <div class="form-outline mb-1">
+                                        <input type="password" id="form2Example27"
+                                            class="form-control form-control-lg" name="password" />
+                                        <label class="form-label" for="form2Example27">Password</label>
+                                    </div>
+
+                                    <div class="pt-0 mb-4">
+                                        <button style="background-color: #132043;" class="btn btn-dark btn-lg btn-block"
+                                            type="submit">Login</button>
+                                    </div>
+
+                                    <a class="small text-muted" href="/user/forgotPass">Forgot password?</a>
+                                    <p class="pb-lg-2" style="color: #393f81;">Don't have an account?
+                                        <a class="reg-here" style="color: #393f81; cursor: pointer;">Register
+                                            here</a>
+                                    </p>
+                                    <a id="login-number-link" class="login-number" style="cursor: pointer; font-size: 1rem; color: #132043; font-weight: bold; text-decoration: underline;">Login with Number</a>
+                                    <!-- <a href="#!" class="small text-muted">Privacy policy</a> -->
+                                    </form>
+                                </div>
+                                <!-- Login end -->
+
+                                <!-- Login mob_no start --> 
+                                <div id="login-number" class="login-form" style="display: none;">
+                                    <form action="/user/login-mob" method="post">
+                                    <div class="phone-pass">
+                                        <div class="form-outline mb-1">
+                                            <input type="number" id="mobile_no-login"
+                                                class="form-control form-control-lg" name="mobile" />
+                                            <label class="form-label" for="mobile_no">Phone No.</label>
+                                            <button id="verifyNum-login" type="button" style="color: #a45d47; background: none; border: none; width: auto; text-decoration: underline; margin: 0 1vw;" onclick="sendLoginOtp()">Verify</button>
+                                            <p id="otp-msg-login"></p>
+                                        </div>
+
+                                        <div id="input-OTP-login" class="form-outline mb-1" style="display: none;">
+                                            <input type="Number" id="entered-otp-login"
+                                                class="form-control form-control-lg" />
+                                            <label class="form-label" for="entered_otp">Enter OTP</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="pt-0">
+                                        <button id="submit-otp-login" class="btn btn-dark btn-lg btn-block"
+                                            type="button" onclick="checkLoginOtp()" disabled>Continue</button>
+                                    </div>
+
+                                    <div id="login-field" style="margin-top: 2rem; opacity: 0;">
+                                        <div class="form-outline mb-1">
+                                            <input type="password" id="form2Example28"
+                                                class="form-control form-control-lg" name="password" />
+                                            <label class="form-label" for="form2Example27">Password</label>
+                                        </div>
+
+                                        <div class="pt-0 mb-4">
+                                            <button id="login-btn" style="background-color: #132043;" class="btn btn-dark btn-lg btn-block"
+                                                type="submit">Login</button>
+                                        </div>
+                                    </div>
+
+                                    <a class="small text-muted" href="/user/forgotPass">Forgot password?</a>
+                                    <p class="pb-lg-2" style="color: #393f81;">Don't have an account?
+                                        <a class="reg-here" style="color: #393f81; cursor: pointer;">Register
+                                            here</a>
+                                    </p>
+                                    <a id="login-email-link" class="login-number" style="cursor: pointer; font-size: 1rem; color: #132043; font-weight: bold; text-decoration: underline;">Login with Email</a>
+                                    </form>
+                                </div>
+                                <!-- Login mob_no end -->
+
+                                        <!-- Register start -->
+
+                                        <div class="register-form">
+                                        <form action="/user/register" method="post">
+
+                                            <!-- <div class="accounts" style="display: flex; ">
+                                                <h5 class="fw-normal mb-2 pb-2" style="letter-spacing: 1px;">Register
+                                                    with:
+                                                </h5> -->
+
+                                                <!-- <i class="fa-brands fa-facebook"></i>
+                                                <i class="fa-brands fa-twitter"></i>
+                                                <i class="fa-brands fa-google"></i>
+                                            </div> -->
+
+                                            <!-- <div class="divider">
+                                                <h5>or</h5>
+                                            </div> -->
+
+                                            <div class="form-outline mb-1 names">
+                                                <div class="fname">
+                                                    <input type="text" id="form2Example17"
+                                                        class="form-control form-control-lg" name="firstname" />
+                                                    <label class="form-label" for="form2Example17">First Name</label>
+                                                </div>
+                                                <div class="lname">
+                                                    <input type="text" id="form2Example18"
+                                                        class="form-control form-control-lg" name="lastname" />
+                                                    <label class="form-label" for="form2Example17">Last Name</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-outline mb-1">
+                                                <input type="email" id="form2Example29"
+                                                    class="form-control form-control-lg" name="email" />
+                                                <label class="form-label" for="form2Example27">Email Address</Address>
+                                                </label>
+                                            </div>
+
+                                            <div class="phone-pass">
+                                                <div class="form-outline mb-1">
+                                                    <input type="number" id="mobile_no"
+                                                        class="form-control form-control-lg" name="mobile" />
+                                                    <label class="form-label" for="mobile_no">Phone No.</Address>
+                                                    </label>
+                                                    <button id="verifyNum" type="button" style="color: #a45d47; background: none; border: none; width: auto; text-decoration: underline; margin: 0 1vw;" onclick="sendRegOtp()">Verify</button>
+                                                    <p id="otp_msg"></p>
+                                                </div>
+
+                                                <div id="input_OTP" class="form-outline mb-1" style="display: none;">
+                                                    <input type="Number" id="entered_otp"
+                                                        class="form-control form-control-lg" />
+                                                    <label class="form-label" for="entered_otp">Enter OTP</Address>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="pt-0">
+                                                <button id="submit_otp" class="btn btn-dark btn-lg btn-block"
+                                                    type="button" onclick="checkOtp()" disabled>Continue</button>
+                                            </div>
+
+                                            <div id="register_field" style="margin-top: 2rem; opacity: 0;">
+                                                <div class="form-outline mb-1">
+                                                    <input type="password" id="form2Example25"
+                                                        class="form-control form-control-lg" name="password" />
+                                                    <label class="form-label" for="form2Example27">Password</Address>
+                                                    </label>
+                                                </div>
+
+                                            <div class="pt-0">
+                                                <button id="reg_btn" class="btn btn-dark btn-lg btn-block"
+                                                    type="submit" disabled>Register</button>
+                                            </div>
+                                            </div>
+
+                                            <!-- <a class="small text-muted" href="#!">Forgot password?</a>
+                                        <p class="mb-1 pb-lg-2" style="color: #393f81;">Don't have an account? <a
+                                                href="#!" style="color: #393f81;">Register here</a></p> -->
+                                            <!-- <a href="#!" class="small text-muted">Terms of use.</a>
+                                        <a href="#!" class="small text-muted">Privacy policy</a> -->
+                                    </form>
+
+                                        </div>
+
+                                    <!-- register end -->
+
+
+                                    <!-- </form> -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <%- include('footer') -%>

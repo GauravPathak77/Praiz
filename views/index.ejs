@@ -1,0 +1,585 @@
+<%- include('header'); -%>
+
+    <!-- Home Section -->
+
+    <% if (user && user.role==="admin" ) { %>
+        <section>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin">Admin</a>
+            </li>
+        </section>
+        <% } %>
+
+            <section id="home" class="home overflow-hidden">
+
+                <div class="mob-circular-menu">
+                    <div class="container">
+                        <a href="/product/?category=Earrings">
+                            <div class="product-4">
+                                <div class="circle">
+                                </div>
+                                <p class="product-name">Earrings</p>
+                            </div>
+                        </a>
+                        <a href="/product/?category=Necklace">
+                            <div class="product-2">
+                                <div class="circle">
+                                </div>
+                                <p class="product-name">Necklace</p>
+                            </div>
+                        </a>
+                        <a href="/product/?category=Rings">
+                            <div class="product-1">
+                                <div class="circle">
+                                </div>
+                                <p class="product-name">Rings</p>
+                            </div>
+                        </a>
+                        <a href="/product/?category=Bracelets">
+                            <div class="product-3">
+                                <div class="circle">
+                                </div>
+                                <p class="product-name">Bracelets</p>
+                            </div>
+                        </a>
+                        <a href="/product/?category=Sets">
+                            <div class="product-5">
+                                <div class="circle">
+                                </div>
+                                <p class="product-name">Sets</p>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+
+                <!-- Pop up start -->
+                <div class="popup-section">
+                    <div class="popup-outer ">
+                        <!-- loader  -->
+
+                        <div class="popup-loader">
+                            <div class="loader"></div>
+                        </div>
+
+                        <div class="popup-error">
+                            <h5>This Email-Id has already been used before!!!</h5>
+                            <a href="/">Enter a new one</a>
+                        </div>
+
+                        <div class="popup-inner">
+                            <button class="popup-close">
+                                <div class="popup-close-icon">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </div>
+                            </button>
+
+                            <div class="popup-left">
+                                <div class="popup-left-up"></div>
+                                <div class="popup-left-down">
+                                    <button class="popup-btn">
+                                        Continue Shopping
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="popup-content">
+                                <div class="popup-top"></div>
+                                <div class="popup-bottom">
+                                    <form class="popup-form" onsubmit="validateAndSubmit(event)">
+                                        <input type="email" id="gift_email" class="popup-email">
+                                        <label class="popup-label">Enter your email</label>
+                                        <input class="popup-submit" type="submit">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="giftLoader"></div>
+                    </div>
+                </div>
+
+
+                <!-- Pop up end -->
+
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                            class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                            aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"
+                            aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="home-banner home-banner-1">
+                                <div class="home-banner-text">
+                                    <!-- <h1>Opening offers are live s</h1> -->
+                                    <!-- <h2>Enjoy exclusive discounts on our premier opening offers</h2> -->
+                                    <a href="/product" class="btn btn-light text-uppercase banner_btn">Check it out </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="home-banner home-banner-2">
+                                <div class="banner-left">
+
+                                </div>
+                                <div class="banner-right" style="margin-top: 10rem; margin-right: 30rem;">
+                                    <div class="home-banner-text home-banner-pc">
+                                        <!-- <h1>SHOP OUR BEST SELLERS</h1> -->
+                                        <!-- <h2> Get up to 70% Discounts</h2> -->
+                                        <!-- <a href="/product" class="btn btn-light text-uppercase" style="background-color: #da645a
+ ; color: white; font-weight: bold;">Check it out </a> -->
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="home-banner home-banner-3">
+                                <div class="home-banner-text">
+                                    <!-- <h1>Shop All</h1> -->
+                                    <!-- <h2>With Working Card & UPI</h2> -->
+                                    <!-- <a href="#" class="btn btn-light text-uppercase mt-4">Our Products</a> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="home-banner home-banner-5">
+                                <div class="home-banner-text">
+                                    <!-- <h1>Shop All</h1> -->
+                                    <!-- <h2>With Working Card & UPI</h2> -->
+                                    <!-- <a href="#" class="btn btn-light text-uppercase mt-4">Our Products</a> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+
+
+                <!-- Offer Zone -->
+                <div class="offers-mob">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6 offer">
+                                <div class="offer-1">
+                                    <form action="/product/filter" method="POST">
+                                        <input type="text" name="style" value="casual"
+                                            style="opacity: 0; display: none;" />
+                                        <button type="submit" class="btn btn-light text-uppercase mt-0"
+                                            style="opacity: 0.5; position: relative; width: 26vw; font-size: 3vw; border-bottom: 0rem;">Shop
+                                            Now</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="col-6 offer">
+                                <div class="offer-2">
+                                    <form action="/product/best_sellers" method="GET">
+                                        <!-- <p class="offer-title-1 font-weight-bold">Don't Miss This Chance</p> -->
+                                        <button type="submit" class="btn btn-light text-uppercase mt-4"
+                                            style="opacity: 0.5; width: 30vw; font-size: 3vw; width: 26vw; border-bottom: 0rem;">Shop
+                                            Now</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="col-6 offer">
+                                <div class="offer-3">
+                                    <form action="/product/filter" method="POST">
+                                        <input type="text" name="style" value="party"
+                                            style="opacity: 0; display: none;" />
+                                        <!-- <p class="offer-title-1 font-weight-bold">Don't Miss This Chance</p> -->
+                                        <button type="submit" class="btn btn-light text-uppercase mt-0"
+                                            style="opacity: 0.5; position: relative; width: 26vw; font-size: 3vw; border-bottom: 0rem;">Shop
+                                            Now</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="col-6 offer">
+                                <div class="offer-4">
+                                    <form action="/product/filter" method="POST">
+                                        <input type="text" name="style" value="office"
+                                            style="opacity: 0; display: none;" />
+                                        <!-- <p class="offer-title-1 font-weight-bold">Don't Miss This Chance</p> -->
+                                        <button type="submit" class="btn btn-light text-uppercase mt-0"
+                                            style="opacity: 0.5; position: relative; width: 26vw; font-size: 3vw; border-bottom: 0rem;">Shop
+                                            Now</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 off-banner-top" style="margin-top: 1.5rem; scale: 1.05;">
+                                <div class="off-banner">
+                                    <!-- <div class="product-top-banner-offer img-fluid w-100 first"></div> -->
+                                    <img src="" alt="offers"
+                                        class="img-fluid w-100 first">
+                                    <!-- <img src="/images/Banner/Lower Banner/banner-mob.png" alt="offers" class="img-fluid w-100 second-mob"> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="offers">
+                    <div class="container">
+                        <div class="row">
+                            <!-- Offer Box One -->
+                            <div class="box-1 col-sm-6 col-lg-4 mb-lg-0 mb-4">
+                                <a href="#">
+                                    <div class="offer-box text-center position-relative">
+                                        <div class="offer-inner">
+                                            <div class="offer-image position-relative overflow-hidden">
+                                                <img src="/images/Banner/Offer-banner/left.webp" alt="offers"
+                                                    class="img-fluid">
+
+
+                                                <!-- OVERLAY -->
+
+
+                                                <div class="offer-overlay"></div>
+                                            </div>
+                                            <div class="offer-info">
+                                                <div class="offer-info-inner">
+                                                    <p class="heading-bigger text-capitalize golden-text">Everyday
+                                                        Elegance</p>
+                                                    <!-- <p class="offer-title-1 font-weight-bold">Don't Miss This Chance</p> -->
+                                                    <form action="/product/filter" method="POST">
+                                                        <input type="text" name="style" value="casual"
+                                                            style="opacity: 0; display: none;" />
+                                                        <button type="submit"
+                                                            class="btn btn-light text-uppercase mt-4">Shop
+                                                            Now</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- Offer Box Two -->
+
+                            <div
+                                class="box-2 col-sm-6 col-lg-4 mb-lg-0 mb-4 d-flex flex-column justify-content-between">
+                                <a href="#">
+                                    <div class="offer-box text-center position-relative mb-4 mb-sm-0 mb-lg-0">
+                                        <div class="offer-inner">
+                                            <div class="offer-image position-relative overflow-hidden">
+                                                <img src="/images/Banner/Offer-banner/top.webp" alt="offers"
+                                                    class="img-fluid">
+                                                <div class="offer-overlay"></div>
+                                            </div>
+                                            <div class="offer-info">
+                                                <div class="offer-info-inner">
+                                                    <p class="heading-bigger text-capitalize">Best Sellers</p>
+                                                    <form action="/product/best_sellers" method="GET">
+                                                        <!-- <p class="offer-title-1 font-weight-bold">Don't Miss This Chance</p> -->
+                                                        <button type="submit"
+                                                            class="btn btn-light text-uppercase mt-4">Shop Now</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#">
+                                    <div class="offer-box text-center position-relative">
+                                        <div class="offer-inner">
+                                            <div class="offer-image position-relative overflow-hidden">
+                                                <img src="/images/Banner/Offer-banner/bottom.webp" alt="offers"
+                                                    class="img-fluid">
+                                                <div class="offer-overlay"></div>
+                                            </div>
+                                            <div class="offer-info">
+                                                <div class="offer-info-inner">
+                                                    <p class="heading-bigger text-capitalize">Party Wear</p>
+                                                    <form action="/product/filter" method="POST">
+                                                        <input type="text" name="style" value="party"
+                                                            style="opacity: 0; display: none;" />
+                                                        <!-- <p class="offer-title-1 font-weight-bold">Don't Miss This Chance</p> -->
+                                                        <button type="submit"
+                                                            class="btn btn-light text-uppercase mt-4">Shop
+                                                            Now</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- Offer Box Three -->
+
+                            <div class="box-3 col-sm-12 col-lg-4 mb-lg-0 mb-4">
+                                <a href="#">
+                                    <div class="offer-box text-center position-relative">
+                                        <div class="offer-inner">
+                                            <div class="offer-image position-relative overflow-hidden">
+                                                <img src="/images/Banner/Offer-banner/right.webp" alt="offers"
+                                                    class="img-fluid">
+                                                <div class="offer-overlay"></div>
+                                            </div>
+                                            <div class="offer-info">
+                                                <div class="offer-info-inner">
+                                                    <p class="heading-bigger text-capitalize">Office Wear</p>
+                                                    <form action="/product/filter" method="POST">
+                                                        <input type="text" name="style" value="office"
+                                                            style="opacity: 0; display: none;" />
+                                                        <!-- <p class="offer-title-1 font-weight-bold">Don't Miss This Chance</p> -->
+                                                        <button type="submit"
+                                                            class="btn btn-light text-uppercase mt-4">Shop
+                                                            Now</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 up-to-off" style="margin-top: 1.5rem;">
+                                <div class="off-banner">
+                                    <img src="/images/Banner/Offer-banner/top-offer.webp" alt="offers"
+                                        class="img-fluid w-100 first">
+                                    <!-- <img src="/images/Banner/Lower Banner/banner-mob.png" alt="offers" class="img-fluid w-100 second-mob"> -->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- Product View -->
+
+            <section id="products" class="products">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="headline text-center">
+                                <h2 class="pb-2 position-relative d-inline-block">Featured Products</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row featured-product">
+
+                        <% if(Products){ %>
+                            <% Products.forEach(product=> { %>
+                                <% if(product.featured){ %>
+
+                                    <div class="col-6 col-sm-6 col-lg-4 col-xl-3">
+                                        <a href="/product/<%= product.slug %>">
+                                            <% if(product.quantity===0){ %>
+                                                    <div class="product-card soldout">
+                                                <% } else { %>
+                                                    <div class="product-card">
+                                                <% } %>
+
+                                                <div class="product-img">
+                                                    <!-- Product Label start -->
+                                                    <% if(product.productLabel !== null) { %> 
+                                                        <div class="productLabel">
+                                                            <%= product.productLabel %>
+                                                        </div>
+                                                    <% } %>
+                                                    
+                                                    <!-- Product Label End -->
+                                                    <span class="discount-tag">
+                                                        New
+                                                    </span>
+
+                                                    <img src="<%= product.thumbnail %>" class="product-thumb"
+                                                        alt="similar-product">
+                                                    <img src="<%= product.images[0] %>" alt="similar-product-s"
+                                                        class="img-fluid product-thumb-s">
+                                                </div>
+                                        </a>
+                                        <div class="product-info">
+                                            <div class="card-dets">
+                                                <a href="/product/<%= product.slug %>">
+                                                            <div class="product-name">
+                                                                <%= product.title %>
+                                                            </div>
+                                                </a>
+                                                <div class="product-price">&#8377 <%= product.sellingPrice %></span>
+                                                        <span class="product-price"><del>&#8377 <%= product.price %>
+                                                            </del></span>
+                                                </div>
+
+                                                <div class="py-1">
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-solid fa-star"></i>
+                                                    <i class="fa-regular fa-star"></i>
+                                                </div>
+                                            </div>
+                                            <div class="card-big-btn">
+                                                <% if(user){ %>
+                                                    <% if(product.quantity===0){ %>
+                                                        <button type="button"
+                                                            class="btn btn-outline-primary card-btn add-to-cart"
+                                                            disabled>Add to Cart</button>
+                                                        <% }else{ %>
+                                                            <button type="button"
+                                                                class="btn btn-outline-primary card-btn add-to-cart"
+                                                                onclick="add_to_cart('<%= product._id %>', '<%= product.slug %>', '<%= product.title %>', '<%= product.images[0] %>', '<%= product.quantity %>', '<%= product.price %>', '<%= product.sellingPrice %>', '<%= product.discount %>', '<%= product.color %>', '<%= user.refreshToken %>')">Add
+                                                                to Cart
+                                                                <i class="d-inline d-sm-none fa-solid fa-cart-shopping" style="color: #ffffff;"></i>
+                                                            </button>
+                                                            <% } %>
+                                                                <% } else { %>
+                                                                    <% if(product.quantity===0){ %>
+                                                                        <button type="button"
+                                                                            class="btn btn-outline-primary card-btn add-to-cart"
+                                                                            disabled>Add to Cart</button>
+                                                                        <% }else{ %>
+                                                                            <button type="button"
+                                                                                class="btn btn-outline-primary card-btn add-to-cart"
+                                                                                onclick="add_to_cart('<%= product._id %>', '<%= product.slug %>', '<%= product.title %>', '<%= product.images[0] %>', '<%= product.quantity %>', '<%= product.price %>', '<%= product.color %>', '-1')">Add
+                                                                                to Cart</button>
+                                                                            <% } %>
+                                                                                <% } %>
+                                                                                    <button type="button"
+                                                                                        class="wishlist-button-small add-to-wish"
+                                                                                        onclick="add_to_wishlist('<%= product._id %>', '<%= user.id %>')">
+                                                                                        <i
+                                                                                            class="fa-regular fa-heart"></i>
+                                                                                    </button>
+                                                                                    <button type="button"
+                                                                                        class="card-btn wishlist-button-small-mob btn btn-outline-primary add-to-wish"
+                                                                                        onclick="add_to_wishlist('<%= product._id %>', '<%= user.id %>')"><i class="fa-regular fa-heart" style="color: #132043;font-size: .9rem;" aria-hidden="true"></i></button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                    </div>
+                    <% } %>
+                        <% }) } %>
+
+                </div>
+                <!-- Lower Banner -->
+                <div class="lower-banner" style="margin-bottom: 2rem;">
+                    <div class="row">
+                        <div class="col-sm-12 up-to-off">
+                            <div class="off-banner">
+                                <img src="/images/Banner/Lower Banner/banner-01.webp" alt="offers"
+                                    class="img-fluid w-100 first">
+                                <!-- <img src="/images/Banner/Lower Banner/banner-mob.png" alt="offers" class="img-fluid w-100 second-mob"> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="lower-hashtag">
+                            <div class="lower-hashtag-inner">
+                                <div class="col-sm-6 col-lg-6 quote text-center">
+                                    <div class="hashtag-section">
+                                        <img src="/images/Banner/Lower Banner 2/lower.webp" alt="hashtag"
+                                            class="hashtag-image">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-lg-6 sign-up">
+                                    <div class="sign-up-right">
+                                        <h2>Join us for regular updates</h2>
+                                        <p>Join the <b>Praiz</b> community to receive exclusive early access to sales,
+                                            new collections and more. Plus you'll get 10% off your first order.
+                                        </p>
+                                        <div class="sign-up-section">
+                                            <form id="emailForm">
+                                            <div class="email-box">
+                                                <input type="email" id="emailInput" name="emai-id"
+                                                    placeholder="Enter your email">
+                                            </div>
+                                            <div class="sign-up-button">
+                                                <button type="button" class="btn btn-success">Sign Up</button>
+                                            </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TESTIMONIAL  LG SCREEN-->
+
+                    <!-- <div class="testimonial">
+                    <div class="row text-center">
+                        <div class="col-md-12"> -->
+                    <!-- Carousel wrapper -->
+                    <!-- <div id="carouselBasicExample" class="carousel slide carousel-dark"
+                                data-mdb-ride="carousel">
+                                <h5>what people say about us...</h5> -->
+                    <!-- Inner -->
+                    <!-- <div class="carousel-inner"> -->
+                    <!-- Single item -->
+                    <!-- <div class="carousel-item active">
+                                        <p class="lead font-italic">
+                                            "Neque cupiditate assumenda in maiores repudiandae mollitia
+                                            adipisci maiores
+                                            repudiandae mollitia consectetur"
+                                        </p>
+                                        <p class="text-muted mb-0">- Anna Morian</p>
+                                    </div> -->
+
+                    <!-- Single item -->
+                    <!-- <div class="carousel-item">
+                                        <p class="lead font-italic mx-4 mx-md-5">
+                                            "Neque cupiditate assumenda in maiores repudiandae mollitia
+                                            adipisci maiores
+                                            repudiandae mollitia consectetur"
+                                        </p>
+
+                                        <p class="text-muted mb-0">- Teresa May</p>
+                                    </div> -->
+
+                    <!-- Single item -->
+                    <!-- <div class="carousel-item">
+                                        <p class="lead font-italic mx-4 mx-md-5">
+                                            "Neque cupiditate assumenda in maiores repudiandae mollitia
+                                            adipisci maiores
+                                            repudiandae mollitia consectetur"
+                                        </p> -->
+
+                    <!-- <p class="text-muted mb-0">- Kate Allise</p>
+                                    </div>
+                                </div> -->
+                    <!-- Inner -->
+
+                    <!-- Controls -->
+                    <!-- <button class="carousel-control-prev" type="button"
+                                    data-mdb-target="#carouselBasicExample" data-mdb-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button"
+                                    data-mdb-target="#carouselBasicExample" data-mdb-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div> -->
+                    <!-- Carousel wrapper -->
+                </div>
+            </section>
+            <!-- Footer -->
+            <%- include('footer') -%>

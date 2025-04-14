@@ -1,0 +1,15 @@
+<%- include('header') -%>
+    
+<section id="blog-space">
+    <div class="container">
+        <div class="blog-body">
+            <% if(blog){ %>
+                <h3 style="text-align: center;"><%= blog.title %></h3>
+                <%- blog.description %>
+            <% } %>
+        </div>
+    </div>
+        
+</section>
+
+<%- include('footer') -%>

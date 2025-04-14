@@ -1,0 +1,376 @@
+<%- include('header') -%>
+
+
+    <!-- Top Banner -->
+    <div class="top-banner">
+        <div class="loc"><a href="/">Home</a><a href=""></a></div>
+        <div class="product-top-banner-cart"></div>
+    </div>
+
+    <!-- Mobile View Buttons -->
+    <section id="mob-cart-view">
+        <% if(Cart){ %>
+            <div class="cart-lower-btn">
+                <% if(Cart.cartTotal - Cart.couponDiscount < 599){ %>
+                    <div class="p-price-total total-amount">Total:<span id="total-amount"> &#8377; <%= ((Cart.cartTotal
+                                + Cart.deliveryCharge) - Cart.couponDiscount).toFixed(1) %></span></div>
+                    <% } else { %>
+                        <div class="p-price-total total-amount">Total:<span id="total-amount"> &#8377; <%=
+                                    (Cart.cartTotal - Cart.couponDiscount).toFixed(1) %></span></div>
+                        <% } %>
+
+                            <% if(Cart.cartTotal> 0) { %>
+                                <button type="button" class="checkout cart_checkout"
+                                    onClick="checkout('<%= Cart._id %>', '<%= user._id %>')">Checkout</button>
+                                <% } else { %>
+                                    <button type="button" class="checkout cart_checkout disabled_btn"
+                                        onClick="checkout('<%= Cart._id %>', '<%= user._id %>')">Checkout</button>
+                                    <% } %>
+
+            </div>
+            <% } %>
+
+                <div class="mob-cart-page container d-block d-sm-none">
+                    <h5 class="text-center">Shopping Cart</h5>
+
+                    <% if(Cart){ %>
+                        <% Cart.products.forEach(item=> { %>
+                            <div class="product-card ">
+                                <div class="card">
+                                    <div class="card-inner">
+                                        <div class="card-left">
+                                            <a href="/product/<%= item?.title?.toLowerCase()?.replaceAll(' ','-') %>">
+                                                <img src="<%= item?.image %>" class="card-img-top" alt="product-img">
+                                            </a>
+                                            <div class="quantity">
+
+                                                <% if(item.sellingPrice===0) { %>
+                                                    <button class="quantity__minus change_quantity" disabled>
+                                                        <span style="color: #ffffff;">-</span></button>
+                                                    <input id="quantity" name="quantity" type="text"
+                                                        class="quantity__input" value="<%= item.count %>">
+                                                    <button class="quantity__plus change_quantity" disabled>
+                                                        <span style="color: #ffffff;">+</span></a>
+                                                        <% } else { %>
+                                                            <a href="" class="quantity__minus change_quantity"
+                                                                onclick="toggle_quantity('<%= Cart._id %>', '<%= item._id %>', -1)"><span
+                                                                    style="color: #ffffff;">-</span></a>
+                                                            <input id="quantity" name="quantity" type="text"
+                                                                class="quantity__input" value="<%= item.count %>">
+                                                            <a href="" class="quantity__plus change_quantity"
+                                                                onclick="toggle_quantity('<%= Cart._id %>', '<%= item._id %>', 1)"><span
+                                                                    style="color: #ffffff;">+</span></a>
+                                                            <div class="spinner"></div>
+                                                            <% } %>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <a href="#">
+                                                <h5 class="card-title">
+                                                    <%= item.title %>
+                                                </h5>
+                                            </a>
+                                            <div class="py-1">
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-regular fa-star"></i>
+                                            </div>
+                                            <div id="p-cost" style="line-height: normal;">
+                                                <h6>&#8377; <%= item.sellingPrice %>
+                                                </h6>
+                                            </div>
+                                            <div id="p-color" style="line-height: normal;">
+                                                <%= item.color %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-btn">
+                                        <a class="w-btn btn btn-primary"
+                                            onclick="add_to_wishlist('<%= item._id %>', '<%= Cart.orderby %>')"><i
+                                                class="fa-solid fa-heart" style="color: #ffffff;"></i>Add to
+                                            Wishlist</a>
+                                        <a class="btn btn-primary remove_cart"
+                                            onclick="remove_from_cart('<%= item._id %>', '<%= bearerToken %>')"><i
+                                                class="fa-solid fa-trash" style="color: #000000;"></i>Remove</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <% })} %>
+
+
+                                <% if(Cart){ %>
+
+                                    <div class="cart-dets">
+                                        <h5 class="fw-bold">Summary</h5>
+                                        <div class="p-cost">Product Cost: <span id="p-cost">&#8377; <%= Cart.totalAmount
+                                                    %></span></div>
+                                        <div class="d-amount">Product Discount: <span id="d-amount">- &#8377; <%=
+                                                    Cart.totalAmount - Cart.cartTotal %></span></div>
+
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <label for="gift-wrap-check">Add a Gift Wrap</label>
+                                            <% if(Cart.isGiftWrap) { %>
+                                                <input type="checkbox" id="gift-wrap-1" onchange="toggleGiftWrapText_1()" checked />
+                                            </div>
+                                            <div id="gift-wrap-text-1" style="color: #a45d47; font-weight: bold;">* Additional ₹25</div>
+                                            <% } else { %>
+                                                <input type="checkbox" id="gift-wrap-1" onchange="toggleGiftWrapText_1()"/>
+                                            </div>
+                                            <% } %>
+
+                                        <!-- Apply Coupon -->
+                                        <label for="coupon-code">Have a coupon?</label>
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <input type="text" name="coupon-code" id="couponName2"
+                                                placeholder="Enter coupon code">
+
+                                            <!-- <a href="javascript:void(0)">Apply Coupon</a> -->
+                                            <button id="cp_btn" class="apply-btn"
+                                                onclick="applyCoupon('<%= user._id %>')"
+                                                style="border: none; background: none; color: #a45d47; font-weight: bold;">Apply
+                                                Coupon</button>
+
+                                        </div>
+                                        <div class="alert alert-success" role="alert">
+                                            Coupon <b>accepted!</b>
+                                        </div>
+                                        <div class="alert alert-danger" role="alert">
+                                            Coupon <b>rejected!</b>
+                                        </div>
+                                        <div class="de-cost">Coupon Discount: <span id="d-cost">- &#8377; <%=
+                                                    Cart.couponDiscount %></span></div>
+                                        <!-- <div class="d-cost">Coupon Discount: <span id="d-cost">- &#8377; <%= Cart.couponDiscount %></span></div> -->
+                                        <!-- Displaying Delivery charge -->
+                                        <% if(Cart.cartTotal-Cart.couponDiscount < 599){ %>
+                                            <div class="de-cost">Delivery Charges: <span id="de-cost">+&#8377; <%=
+                                                        Cart.deliveryCharge %></span></div>
+                                            <p class="free-delivery">*Buy items worth <span id="remaining-cost">&#8377;
+                                                    <%= 599 - Cart.cartTotal - Cart.couponDiscount %>
+                                                </span>more to
+                                                get FREE Delivery on your purchase</p>
+                                            <% } else { %>
+                                                <div class="de-cost">Delivery Charges: <span id="de-cost">&#8377;<del>
+                                                            <%= Cart.deliveryCharge %>
+                                                        </del></span></div>
+                                                <% } %>
+                                    </div>
+                                    <% } %>
+                </div>
+    </section>
+
+    <section id="cart-page">
+        <div class="cart-page-inner container d-none d-sm-flex">
+            <div class="cart-page-left">
+                <h5 class="section-head fw-bold">Shopping Cart</h5>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Quanity</th>
+                            <th scope="col" class="color-head">Colour</th>
+                            <th scope="col" class="price-head">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if(Cart){ %>
+                            <% Cart.products.forEach(item=> { %>
+                                <tr>
+                                    <td class="product-col">
+                                        <div class="product-card">
+                                            <div class="card" style="width: 18rem;">
+                                                <img src="<%= item?.image %>" class="card-img-top" alt="product1">
+                                                <div class="card-body">
+                                                    <a
+                                                        href="/product/<%= item?.title?.toLowerCase()?.replaceAll(' ','-')+ '-' + item?.color %>">
+                                                        <h5 class="card-title">
+                                                            <%= item.title %>
+                                                        </h5>
+                                                    </a>
+                                                    <!-- <div class="card-text d-none d-md-block d-lg-none ">
+                                                <span id="p-price">&#8377; 489</span>
+                                                <span id="p-color">Silver</span>
+                                            </div> -->
+                                                    <div class="card-btn">
+                                                        <button type="button" class="btn btn-outline-light"
+                                                            onclick="add_to_wishlist('<%= item._id %>', '<%= Cart.orderby %>')">
+                                                            <i class="fa-solid fa-heart" style="color: #000000;"></i>Add
+                                                            to
+                                                            Wishlist
+                                                        </button>
+                                                        <button type="button" class="btn btn-outline-light remove_cart"
+                                                            onclick="remove_from_cart('<%= item._id %>', '<%= bearerToken %>')"><i
+                                                                class="fa-solid fa-trash"
+                                                                style="color: #000000;"></i>Remove
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="quanity-row">
+                                        <div class="quantity">
+
+                                            <% if(item.sellingPrice===0) { %>
+                                                <button class="quantity__minus" disabled>
+                                                    <span style="color: #ffffff;">-</span></button>
+                                                <input type="text" class="quantity__input" id="<%= item._id %>"
+                                                    value="<%= item.count %>" />
+                                                <button class="quantity__plus" disabled>
+                                                    <span style="color: #ffffff;">+</span></button>
+                                                <% } else { %>
+
+                                                    <div class="spinner"></div>
+                                                    <a href="" class="quantity__minus"
+                                                        onclick="toggle_quantity('<%= Cart._id %>', '<%= item._id %>', -1)"><span
+                                                            style="color: #ffffff;">-</span></a>
+                                                    <input type="text" class="quantity__input" id="<%= item._id %>"
+                                                        value="<%= item.count %>" />
+                                                    <a href="" class="quantity__plus"
+                                                        onclick="toggle_quantity('<%= Cart._id %>', '<%= item._id %>', 1)"><span
+                                                            style="color: #ffffff;">+</span></a>
+                                                    <% } %>
+                                        </div>
+
+                                    </td>
+                                    <td class="color-col">
+                                        <%= item.color %>
+                                    </td>
+                                    <td class="price-col">&#8377; <%= item.sellingPrice %>
+                                    </td>
+                                    <!-- <td>
+                                <div class="card-btn">
+                                    <button type="button" class="btn btn-outline-light" onclick="remove_from_cart('<%= item._id %>', '<%= bearerToken %>')"><i
+                                            class="fa-solid fa-trash" style="color: #000000;"></i>
+                                    </button>
+                                </div>
+                            </td> -->
+                                </tr>
+                                <% })} %>
+
+
+                    </tbody>
+                </table>
+            </div>
+
+            <% if(Cart){ %>
+                <div class="cart-page-right">
+                    <div class="right-top">
+                        <h5 class="section-head fw-bold">Summary</h5>
+                        <div class="right-top-inner">
+                            <div class="p-cost">Product Cost: <span id="p-cost">&#8377; <%= Cart.totalAmount %></span>
+                            </div>
+
+                            <div class="d-amount">Product Discount: <span id="d-amount">- &#8377; <%= Cart.totalAmount -
+                                        Cart.cartTotal %></span></div>
+
+                            <div style="display: flex; justify-content: space-between;">
+                                <label for="gift-wrap-check">Add a Gift Wrap</label>
+                                <% if(Cart.isGiftWrap) { %>
+                                    <input type="checkbox" id="gift-wrap-2" onchange="toggleGiftWrapText_2()" checked/>
+                                    </div>
+                                    <div id="gift-wrap-text-2" style="color: #a45d47; font-weight: bold;">* Additional ₹25</div>
+                                <% } else { %>
+                                    <input type="checkbox" id="gift-wrap-2" onchange="toggleGiftWrapText_2()" />
+                            </div>
+                                <% } %>
+
+
+                            <!-- Apply Coupon -->
+                            <p>Have a coupon?</p>
+
+                            <div style="display: flex; justify-content: space-between;">
+                                <input type="text" name="coupon-code" id="couponName1" placeholder="Enter coupon code">
+
+                                <!-- <a href="javascript:void(0)">Apply Coupon</a> -->
+                                <button id="cp_btn" class="apply-btn" onclick="applyCoupon('<%= user._id %>')"
+                                    style="border: none; background: none; color: #a45d47; font-weight: bold;">Apply
+                                    Coupon</button>
+
+                            </div>
+                            <!-- <a href="#" onclick="applyCoupon('<%= bearerToken %>')">Apply Coupon</a> -->
+
+                            <div class="alert alert-success" role="alert">
+                                Coupon <b>accepted!</b>
+                            </div>
+                            <div class="alert alert-danger" role="alert">
+                                Coupon <b>rejected!</b>
+                            </div>
+                            <div class="d-cost">Coupon Discount: <span id="d-cost">- &#8377; <%= Cart.couponDiscount %>
+                                </span></div>
+
+                            <!-- Displaying Delivery charge -->
+                            <% if(Cart.cartTotal-Cart.couponDiscount < 599){ %>
+                                <div class="de-cost">Delivery Charges: <span id="de-cost">+&#8377; <%=
+                                            Cart.deliveryCharge %></span></div>
+                                <p class="free-delivery">*Buy items worth <span id="remaining-cost">&#8377; <%= 599 -
+                                            Cart.cartTotal-Cart.couponDiscount %> </span>more to
+                                    get FREE Delivery on your purchase</p>
+                        </div>
+
+
+                    </div>
+                    <div class="right-bottom">
+                        <div class="total-amount">Subtotal: <span id="total-amount">&#8377;<%= (Cart.cartTotal +
+                                    Cart.deliveryCharge - Cart.couponDiscount).toFixed(1) %></span></div>
+                        <div class="total-amount">Total Saving: <span id="total-amount">&#8377;<%= (Cart.totalAmount +
+                                    Cart.deliveryCharge + Cart.couponDiscount - Cart.cartTotal).toFixed(1) %></span>
+                        </div>
+                        <div class="check-btn">
+                            <p>*Inclusive of all taxes</p>
+                            <!-- <a href="/user/checkout"> -->
+                            <% if(Cart.cartTotal> 0) { %>
+                                <button type="button" class="checkout btn btn-outline-primary cart_checkout"
+                                    onClick="checkout('<%= Cart._id %>', '<%= user._id %>')">Checkout</button>
+                                <% } else { %>
+                                    <button type="button"
+                                        class="checkout btn btn-outline-primary cart_checkout disabled_btn"
+                                        onClick="checkout('<%= Cart._id %>', '<%= user._id %>')">Checkout</button>
+                                    <% } %>
+                                        <!-- </a> -->
+                                        <a href="/"><button type="button"
+                                                class="cont-shopping btn btn-outline-primary">Continue
+                                                Shopping</button></a>
+                        </div>
+                        <% } else { %>
+                            <div class="de-cost">Delivery Charges: <span id="de-cost">&#8377;<del>
+                                        <%= Cart.deliveryCharge %>
+                                    </del></span></div>
+                    </div>
+                    <!--  -->
+                </div>
+                <div class="right-bottom">
+                    <div class="total-amount">Subtotal: <span id="total-amount">&#8377;<%= (Cart.cartTotal -
+                                Cart.couponDiscount).toFixed(1) %></span></div>
+                    <div class="total-amount">Total Saving: <span id="total-amount">&#8377;<%= (Cart.totalAmount +
+                                Cart.couponDiscount - Cart.cartTotal).toFixed(1) %></span></div>
+                    <div class="check-btn">
+                        <p>*Inclusive of all taxes</p>
+                        <!-- <a href="/user/checkout"><button type="button" class="checkout btn btn-outline-primary">Checkout</button></a> -->
+
+                        <% if(Cart.cartTotal> 0) { %>
+                            <button type="button" class="checkout btn btn-outline-primary cart_checkout"
+                                onClick="checkout('<%= Cart._id %>', '<%= user._id %>')">Checkout</button>
+                            <% } else { %>
+                                <button type="button"
+                                    class="checkout btn btn-outline-primary cart_checkout disabled_btn"
+                                    onClick="checkout('<%= Cart._id %>', '<%= user._id %>')">Checkout</button>
+                                <% } %>
+                                    <a href="/"><button type="button"
+                                            class="cont-shopping btn btn-outline-primary">Continue Shopping</button></a>
+                    </div>
+                    <!--  -->
+                    <% } %>
+
+
+                </div>
+        </div>
+        <% } %>
+            </div>
+    </section>
+
+
+    <!-- Footer -->
+    <%- include('footer') -%>

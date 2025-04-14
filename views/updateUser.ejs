@@ -1,0 +1,73 @@
+<%- include('header') -%>
+
+    <!-- Mobile View Buttons -->
+
+    <!-- Main Content -->
+    
+    <section id="register" style="margin-top: 18vw;">
+        <!-- <div class="form-container">
+            <div class="reg-img"></div>
+            <div class="reg-form">
+
+            </div>
+        </div> -->
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-xl-10">
+                    <div class="card">
+                        <div class="row g-0">
+                            <div class="reg-img col-md-6 col-lg-6 d-none d-md-none d-xl-block d-lg-block">
+                                <img src="/images/Register/img/reg.png" alt="login form" class="img-fluid">
+                            </div>
+                            <div class="reg-img col-md-6 col-lg-6 d-none d-md-block d-xl-none d-lg-none">
+                                <img src="/images/Register/img/reg-md.png" alt="login form" class="img-fluid">
+                            </div>
+                            <div class="col-md-6 col-lg-6 d-flex align-items-center">
+                                <div class="card-body p-4 p-lg-5 text-black">
+
+                                    <!-- <form> -->
+                                        <div class="choose-way s-login">
+                                            <ul>
+                                                <li class="sign-up">
+                                                    <a href="/user/register"  style="color: #fff;">Register</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <!-- Login start --> 
+
+                                        <div class="login-form">
+                                            <!-- <form onsubmit="event.preventDefault(); submitUpdatedPassword('<%= user._id %>')"> -->
+                                            <form action="/user/setUpdate/<%= user._id %>" method="post">
+                                            <div class="form-outline mb-1">
+                                                <label class="form-label" for="form2Example17">New Password</label>
+                                                <input type="text" id="form2Example17 pass1"
+                                                    class="form-control form-control-lg" name="pass" />
+                                            </div>
+
+                                            <div class="form-outline mb-1">
+                                                <label class="form-label" for="form2Example17">Confirm Password</label>
+                                                <input type="text" id="form2Example17 pass2"
+                                                    class="form-control form-control-lg" name="pass" />
+                                            </div>
+
+                                            <div class="pt-0 mb-4" style="margin-top: 2vw;">
+                                                <button style="background-color: #132043;" class="btn btn-dark btn-lg btn-block"
+                                                    type="submit" id="updatePassword">Set</button>
+                                            </div>
+                                            </form>
+
+                                        </div>
+
+                                    <!-- </form> -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <%- include('footer') -%>

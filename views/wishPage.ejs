@@ -1,0 +1,100 @@
+<%- include('header') -%>
+
+
+    <!-- Top Banner -->
+    <div class="top-banner" style="margin-top: 15rem;">
+        <div class="product-top-banner-wish"></div>
+    </div>
+
+    <!-- Mobile View Buttons -->
+    <section id="mob-cart-view">
+
+        <div class="mob-cart-page container d-block d-sm-none">
+            <h5 class="text-center">Wishlist</h5>
+            
+            <% if(Wishlist){ %>
+                <% Wishlist.forEach(item => { %>
+
+            <div class="product-card ">
+                <div class="card">
+                    <a href="/product/<%= item.slug %>">
+                    <div class="card-left">
+                        <img src="<%= item.images[0] %>" class="card-img-top" alt="product-img">
+                    </div>
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title"><%= item.title %></h5>
+                        <div style="display: flex;">
+                                                
+                            <button type="button" class="btn btn-outline-light" onclick="remove_from_wishlist('<%= item._id %>', '<%= user._id %>')"><i
+                                    class="fa-solid fa-trash" style="color: #000000;"></i>Remove
+                            </button>
+
+                            <div class="py-1">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                            </div>
+
+                        </div>
+                        <div id="p-cost" style="line-height: normal;">
+                            <h6>&#8377; <%= item.price %></h6>
+                        </div>
+                        <div id="p-color" style="line-height: normal;"><%= item.color %></div>
+                    </div>
+                </div>
+            </div>
+            <% })} %>
+        </div>
+    </section>
+
+    <section id="cart-page">
+        <div class="cart-page-inner container d-none d-sm-flex">
+            <div class="cart-page-left">
+                <h5 class="section-head fw-bold">WishList</h5>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col" class="color-head">Colour</th>
+                            <th scope="col" class="price-head">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <% if(Wishlist){ %>
+                        <% Wishlist.forEach(item => { %>
+                        <tr>
+                            <td class="product-col">
+                                <div class="product-card">
+                                    <div class="card" style="width: 18rem;">
+                                        <img src="<%= item.images[0] %>" class="card-img-top" alt="product">
+                                        <div class="card-body">
+                                            <a href="/product/<%= item.slug %>"><h5 class="card-title"><%= item.title %></h5></a>
+                                            <div class="card-btn">
+                                                
+                                                <button type="button" class="btn btn-outline-light" onclick="remove_from_wishlist('<%= item._id %>', '<%= user._id %>')"><i
+                                                        class="fa-solid fa-trash" style="color: #000000;"></i>Remove
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="color-col"><%= item.color %></td>
+                            <td class="price-col">&#8377; <%= item.price %></td>
+                        </tr>
+                        <% })} %>
+
+                   </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <%- include('footer') -%>

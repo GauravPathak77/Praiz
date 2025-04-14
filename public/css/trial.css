@@ -1,0 +1,73 @@
+#products .featured-product .product-card .product-img .product-thumb {
+    height: 70%;
+}
+
+#products .featured-product .product-card {
+    width: 100%;
+    margin-top: 2rem;
+    height: 405px;
+}
+
+#products .featured-product .product-card .product-img {
+    padding-left: 8px;
+    padding-right: 8px;
+
+}
+
+#products .featured-product .product-card .product-img .product-thumb-s {
+    height: 70%;
+    width: 89%;
+    left: 8px;
+    top: 28px;
+}
+
+#products .featured-product .product-card .product-info {
+    margin-top: -30px;
+}
+
+#products .featured-product .product-card .product-info .product-name {
+    font-size: 1.1rem;
+}
+
+#products .featured-product .product-card .card-btn {
+    float: none;
+    margin-left: auto;
+    margin-right: 2px;
+    width: 85%;
+    margin-top: 0;
+}
+
+#products .featured-product .product-card .product-info .wishlist-button-small {
+    display: none;
+}
+
+#products .featured-product .product-card .product-info .wishlist-button-small-mob {
+    display: block;
+    background-color: #F4F5F5;
+    border: 1px solid #a45d47;
+    color: #a45d47;
+    padding: .4rem;
+    font-size: 1rem;
+    float: none;
+    margin-left: auto;
+    margin-right: .78rem;
+    width: 85%;
+    border-radius: 0px;
+    margin-top: .5rem;
+
+}
+
+#products .featured-product .product-card .product-info .wishlist-button-small-mob.btn-outline-primary {
+    color: #132043;
+    border-color: #132043;
+}
+
+#products .featured-product .product-card .product-info .wishlist-button-small-mob.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #a45d47;
+    border-color: #a45d47;
+}
+
+#products .featured-product .product-card .product-info .wishlist-button-small-mob.btn-outline-primary:focus {
+    box-shadow: 0 0 0 .25rem rgba(164, 93, 71, 0.363)
+}

@@ -1,0 +1,148 @@
+<%- include('header') -%>
+
+    <!-- Top Banner -->
+    <div class="top-banner">
+        <div class="loc"><a href="/">Home</a></div>
+        <div class="cart-banner"></div>
+    </div>
+
+    <!-- Mobile View Buttons -->
+    
+
+    <section id="checkout-page">
+        <div class="checkout-page-inner container">
+            <div class="checkout-page-left">
+                <div class="page-left-top">
+                    <h5 class="section-head fw-bold mb-3">Choose Address</h5>
+                    <div class="address-opt">
+
+                        <!-- Order Id -->
+                        <input type="text" id="order_id" style="display: none;" value="<%= order._id %>">
+
+
+                        <!-- <div class="form-check selected"> -->
+                            <% if(user){ %>
+                                <% user.address.forEach((item, index) =>{ %>
+                            <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                <div class="address-container">
+                                    <span class="address-firstname" style="display: none;"><%= item.firstname %></span>
+                                    <span class="address-lastname" style="display: none;"><%= item.lastname %></span>
+                                    <span class="address-pin_code" style="display: none;"><%= item.pin_code %></span>
+                                    <span class="address-phone_number" style="display: none;"><%= item.phone_number %></span>
+                                    <span class="address-title" id="address-name"><%= item.title %></span><span>:</span>
+                                    <span class="address-content" id="address"><%= item.address %></span>
+                                </div>
+                            </label>
+                        </div>
+                        <% })} %>
+
+                        <div class="form-check new-add-form">
+                            <input class="form-check-input" type="radio" checked name="flexRadioDefault" id="flexRadioDefault3">
+                            <label class="form-check-label" for="flexRadioDefault3">
+                                <div class="address-container">
+                                    <span>New Address <span style="opacity: .8; margin-left: 1rem;">(Click to add)</span></span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <form class="address-form" onsubmit="event.preventDefault(); check_address('<%= user._id %>');">
+                            <!-- 2 column grid layout with text inputs for the first and last names -->
+                            <div class="row mb-1">
+                                <div class="col">
+                                    <div data-mdb-input-init class="form-outline">
+                                        <input type="text" id="firstname" class="form-control" name="firstname" required/>
+                                        <label class="form-label" for="form6Example1">First name</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div data-mdb-input-init class="form-outline">
+                                        <input type="text" id="lastname" class="form-control" name="lastname" required/>
+                                        <label class="form-label" for="form6Example2">Last name</label>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <!-- Text input -->
+                            <div data-mdb-input-init class="form-outline mb-1">
+                                <input type="text" id="address1" class="form-control" name="address1" required/>
+                                <label class="form-label" for="form6Example3">Address Line 1</label>
+                            </div>
+        
+                            <!-- Text input -->
+                            <div data-mdb-input-init class="form-outline mb-1">
+                                <input type="text" id="address2" class="form-control" name="address2"/>
+                                <label class="form-label" for="form6Example4">Address Line 2 (Optional)</label>
+                            </div>
+        
+                            <div class="row mb-1">
+                                <div class="col">
+                                    <div data-mdb-input-init class="form-outline">
+                                        <input type="number" id="pin_code" class="form-control" name="pin_code" required/>
+                                        <label class="form-label" for="form6Example1">Pin Code</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div data-mdb-input-init class="form-outline">
+                                        <input type="number" id="phone_no" class="form-control" name="phone_no" required/>
+                                        <label class="form-label" for="form6Example2">WhatsApp Number</label>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="row mb-1">
+                                <div class="col">
+                                    <div data-mdb-input-init class="form-outline">
+                                        <input type="text" id="title" class="form-control"
+                                            placeholder="Home / Office / Others" name="title" required/>
+                                        <label class="form-label" for="form6Example1">Name this Address</label>
+                                    </div>
+        
+                                </div>
+                                <div class="col">
+                                    <button data-mdb-ripple-init type="submit"
+                                        class="submit-btn btn btn-primary btn-block mb-4">Submit</button>
+                                        <!-- <button type="submit" class="submit-btn btn btn-primary btn-block mb-4" onclick="save_address()">Submit</button> -->
+                                </div>
+                            </div>
+                            <div id="address_alert" class="alert-text-danger" style="color: red;"></div>
+                            <div id="address_submit" class="alert-text-success"></div>
+                        </form>
+                    </div>
+                </div>
+                
+            </div>
+
+            <% if(order){ %>
+            <div class="checkout-page-right">
+                <form class="pay-form">
+                    <!-- <form action="/thankYou" method="GET"> -->
+                <div class="right-top">
+                    <h5 class="section-head fw-bold">Summary</h5>
+                    <div class="right-top-inner">
+                        <div class="total-amount">Total Amount: <span id="total-amount">&#8377; <%= order.paymentIntent.amount %></span></div>
+                        <!-- <div class="saving-amount" style="margin-top: 0.5rem;">You saved: <span id="saving-amount">&#8377; 250</span></div> -->
+                        <div class="check-btn">
+                        <input type="hidden" name="key_id" value="<%= order._id %>">
+                        <input type="hidden" name="name" value="PRAIZ order Processed">
+				        <input type="hidden" name="amount" value="<%= order.paymentIntent.amount %>">
+				        <input type="hidden" name="description" value="Order by <%= user.firstname %> <%= user.lastname %>, ID: <%= order.orderby %>">
+                        <!-- <button type="submit" class="cont-payment btn btn-outline-primary">Continue</button> -->
+                        <p id="check_loader"></p>
+                        <button type="button" id="checkout_securely" class="cont-payment btn btn-outline-primary" style="margin-top: 2rem;" onclick="checkoutSecurely('<%= order._id %>')" disabled>Checkout Securely</button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </form>
+                <div class="right-bottom">
+                </div>
+            </div>
+            <% } %>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <%- include('footer') -%>

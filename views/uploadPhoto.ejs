@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Praiz</title>
+</head>
+<body>
+    <section id="uploadImages">
+        <form action="/product/upload/<%= id %>" method="post" enctype="multipart/form-data">
+            <label for="images">Upload Images (up to 10):</label>
+            <input type="file" id="images" name="images" multiple required>
+            <button type="submit">Upload</button>
+        </form>
+    </section>
+</body>
+</html>

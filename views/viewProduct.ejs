@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Praiz</title>
+</head>
+<body>
+    <h1>Product List</h1>
+
+    <% product.forEach(item =>{ %>
+        <div class="product">
+            <h2>Title: <%= item.title %></h2>
+            <% item.images.forEach(image => { %>
+            <img src="<%= image.url %>" alt="Product image" height="100px" width="100px">
+            <% }) %>
+            <p>Description: <%= item.description %></p>
+            <p>Price: <%= item.price %></p>
+        </div>
+    <% }) %>
+
+    <hr>
+</body>
+</html>

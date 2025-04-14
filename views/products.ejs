@@ -1,0 +1,469 @@
+<%- include('header') -%>
+
+    <!-- Mobile View Buttons -->
+
+    <div class="mobileShow-plist">
+        <button class="filter-mob">Filters</button>
+        <button class="sort-mob">Sort By</button>
+    </div>
+
+    <div class="side-menu">
+        <div class="filter-menu">
+            <div class="head">
+                <div class="headline position-relative">
+                    <h1>Filters</h1>
+                </div>
+                <div class="close-side-menu">&#x2715;</div>
+            </div>
+
+            <div class="side-dropdowns">
+                <button class="dropdown-btn">STYLE
+                    <i class="fa fa-caret-right"></i>
+                </button>
+                <div class="dropdown-container">
+                    <ul class="option-list">
+                        <li class="option">
+                            <!-- <span class="checkbox"> -->
+                                <input type="checkbox" id="casualCheckbox" class="checkbox" onchange="handleStyle()">
+                                <!-- <i class="fa-solid fa-check"></i> -->
+                            <!-- </span> -->
+                            <span class="option-text">Casual</span>
+                        </li>
+
+                        <li class="option">
+                            <!-- <span class="checkbox"> -->
+                                <input type="checkbox" id="partyCheckbox" class="checkbox" onchange="handleStyle()">
+                                <!-- <i class="fa-solid fa-check"></i> -->
+                            <!-- </span> -->
+                            <span class="option-text">Party</span>
+                        </li>
+
+                        <li class="option">
+                            <input type="checkbox" id="officeCheckbox" class="checkbox" onchange="handleStyle()">
+                            <!-- <span class="checkbox"> -->
+                                <!-- <i class="fa-solid fa-check"></i> -->
+                            <!-- </span> -->
+                            <span class="option-text">Office</span>
+                        </li>
+
+                        <li class="option">
+                            <input type="checkbox" id="traditionalCheckbox" class="checkbox" onchange="handleStyle()">
+                            <!-- <span class="checkbox"> -->
+                                <!-- <i class="fa-solid fa-check"></i> -->
+                            <!-- </span> -->
+                            <span class="option-text">Traditional</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <button class="dropdown-btn">COLOUR
+                    <i class="fa fa-caret-right"></i>
+                </button>
+                <div class="dropdown-container">
+                    <ul class="color-list">
+                        <li class="c-one" onclick="handleColor('Silver')">Silver</li>
+                        <li class="c-two" onclick="handleColor('Gold')">Gold</li>
+                        <li class="c-three" onclick="handleColor('Black')">Black</li>
+                        <li class="c-all" onclick="handleColor('')">All Colours</li>
+                    </ul>
+                </div>
+
+                <!-- <button class="dropdown-btn">PRICE
+                    <i class="fa fa-caret-right"></i>
+                </button>
+                <div class="dropdown-container"> -->
+
+                    <!-- <div class="price-slider">
+                        <div class="price-input">
+                            <div class="field">
+                                <span>Min</span>
+                                <input type="number" id="min_input" class="input-min" value="600">
+                            </div>
+                            <div class="separator">-</div>
+                            <div class="field">
+                                <span>Max</span>
+                                <input type="number" id="max_input" class="input-max" value="1200">
+                            </div>
+                        </div>
+                        <div class="slider">
+                            <div class="progress"></div>
+                        </div>
+                        <div class="range-input">
+                            <input type="range" class="range-min" min="300" max="1400" value="500" step="100">
+                            <input type="range" class="range-max" min="400" max="1500" value="1000" step="100">
+                        </div>
+                    </div> -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="mid-option">
+        <div class="close-mid-menu">&#x2715;</div>
+        <ul class="sort-option">
+            <a href="/product?category=<%= Products[0].category %>&sort=title"><li style="color: black;"><span class="sort-text">A <span> &#8594; </span> Z</span></li></a>
+            <a href="/product/desc?category=<%= Products[0].category %>&sort=title"><li style="color: black;"><span class="sort-text">Z <span>&#8592;</span>
+                    A</span></li></a>
+            <a href="/product?category=<%= Products[0].category %>&sort=sellingPrice"><li style="color: black;"><span>Price: Low to High</span></li></a>
+            <a href="/product/desc?category=<%= Products[0].category %>&sort=sellingPrice"><li style="color: black;"><span>Price: High to Low</span></li></a>
+            <a href="/product/desc?category=<%= Products[0].category %>&sort=updatedAt"><li style="color: black;"><span>Latest to Earliest</span></li></a>
+            <a href="/product?category=<%= Products[0].category %>&sort=updatedAt"><li style="color: black;"><span>Earliest to Latest</span></li></a>
+        </ul>
+    </div>
+
+    <!-- Top Banner -->
+    <div class="top-banner">
+        <% if(Products.length > 20) { %>
+            <div class="loc"><a href="/">Home</a> / <a href="/product" id="nav_loc">Products</a></div>
+            <!-- <div id="cat-banner" class="product-top-banner" style="background-repeat: no-repeat; background-size: cover;"></div> -->
+        <% } else { %>
+            <div class="loc"><a href="/">Home</a> / <a href="/product?category=<%= Products[0].category %>" id="nav_loc"><%= Products[0].category %></a></div>
+        <div id="cat-banner" class="product-top-banner" style="background-repeat: no-repeat; background-size: cover;">
+            <% } %>
+            <!-- <img src="/images/Banner/<%= Products[0].category %>/pc.webp"> -->
+        </div>
+    </div>
+
+    <section id="product-list">
+
+        <!-- Filter row  -->
+        <div class="filter-container container">
+            <div class="filter-row">
+                <div class="filter-style"> <!--Container-->
+                    <div class="style-btn">
+                        <span class="btn-text">STYLE</span>
+                        <span class="arrow-dwn">
+                            <i class="fa-solid fa-circle-chevron-down" style="color: #132043;"></i>
+                        </span>
+                    </div>
+
+                    <ul class="option-list">
+                        <li class="option">
+                            <input type="checkbox" id="casualCheckbox" class="checkbox" onchange="handleStyle()" value="Casual">
+                            <span>Casual</span>
+                        </li>
+                        <li class="option">
+                            <input type="checkbox" id="partyCheckbox" class="checkbox" onchange="handleStyle()" value="Party">
+                            <span>Party</span>
+                        </li>
+                        <li class="option">
+                            <input type="checkbox" id="officeCheckbox" class="checkbox" onchange="handleStyle()" value="office">
+                            <span>Office</span>
+                        </li>
+                        <li class="option">
+                            <input type="checkbox" id="traditionalCheckbox" class="checkbox" onchange="handleStyle()">
+                            <span>Traditional</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="filter-style"> <!--Container-->
+                    <div class="style-btn">
+                        <span class="color-btn-text">COLOUR</span>
+                        <span class="arrow-dwn">
+                            <i class="fa-solid fa-circle-chevron-down" style="color: #132043;"></i>
+                        </span>
+                    </div>
+
+                    <ul class="color-list">
+                        <li class="color color1" onclick="handleColor('Silver')"> Silver</li>
+                        <li class="color color2" onclick="handleColor('Gold')">Gold</li>
+                        <li class="color color3" onclick="handleColor('Black')">Black</li>
+                        <li class="color colorAll" onclick="handleColor('')">All Colours</li>
+
+                    </ul>
+                </div>
+
+                <!--Container-->
+
+                <div class="filter-style"> 
+                    <div class="style-btn">
+                        <span class="btn-text">Price</span>
+                        <span class="arrow-dwn">
+                            <i class="fa-solid fa-circle-chevron-down" style="color: #132043;"></i>
+                        </span>
+                    </div>
+                    <!-- <div class="price-slider">
+                        <div class="price-input">
+                            <div class="field">
+                                <span>Min</span>
+                                <input type="number" class="input-min" value="2500">
+                            </div>
+                            <div class="separator">-</div>
+                            <div class="field">
+                                <span>Max</span>
+                                <input type="number" class="input-max" value="7500">
+                            </div>
+                        </div>
+                        <div class="slider">
+                            <div class="progress"></div>
+                        </div>
+                        <div class="range-input">
+                            <input type="range" class="range-min" min="0" max="10000" value="2500" step="100">
+                            <input type="range" class="range-max" min="0" max="10000" value="7500" step="100">
+                        </div>
+                    </div> -->
+                    <ul class="sort-list">
+                        <li class="sort">
+                            <span class="sort-text">SORT BY</span>
+                        </li>
+
+                        <a href="/product?category=<%= Products[0].category %>&sort=sellingPrice"><li class="sort" style="color: black;">
+                            <span class="sort-text">Price: Low to High</span>
+                        </li></a>
+
+                        <a href="/product/desc?category=<%= Products[0].category %>&sort=sellingPrice"><li class="sort" style="color: black;">
+                            <span class="sort-text">Price: High to Low</span>
+                        </li></a>
+                        </ul>
+                
+                </div>
+
+                <div class="filter-style"> <!--Container-->
+                    <div class="style-btn">
+                        <span class="sort-btn-text">SORT BY</span>
+                        <span class="arrow-dwn">
+                            <i class="fa-solid fa-circle-chevron-down" style="color: #132043;"></i>
+                        </span>
+                    </div>
+
+                    <ul class="sort-list">
+                        <li class="sort">
+                            <span class="sort-text">SORT BY</span>
+                        </li>
+
+                        <a href="/product?category=<%= Products[0].category %>&sort=title"><li class="sort" style="color: black;">
+                            <span class="sort-text">A <span> &#8594; </span> Z</span>
+                        </li></a>
+
+                        <a href="/product/desc?category=<%= Products[0].category %>&sort=title"><li class="sort" style="color: black;">
+                            <span class="sort-text">Z <span>&#8592;</span>
+                                A</span>
+                        </li></a>
+
+                        <!-- <a href="/product?category=<%= Products[0].category %>&sort=sellingPrice"><li class="sort" style="color: black;">
+                            <span class="sort-text">Price: Low to High</span>
+                        </li></a>
+
+                        <a href="/product/desc?category=<%= Products[0].category %>&sort=sellingPrice"><li class="sort" style="color: black;">
+                            <span class="sort-text">Price: High to Low</span>
+                        </li></a> -->
+
+                        <a href="/product/desc?category=<%= Products[0].category %>&sort=updatedAt"><li class="sort" style="color: black;">
+                            <span class="sort-text">Latest to Earliest</span>
+                        </li></a>
+
+                        <a href="/product?category=<%= Products[0].category %>&sort=updatedAt"><li class="sort" style="color: black;">
+                            <span class="sort-text">Earliest to Latest</span>
+                        </li></a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="product-listing">
+            <div class="container">
+                <div class="row">
+
+                    <% if(Products) { %>
+                        <% Products.forEach(product => { %>
+
+                    <div class="col-6 col-sm-6 col-lg-4 col-xl-3">
+
+                        <% if(product.quantity === 0){ %>
+                            <div class="product-card soldout">
+                        <% }else{ %>
+                            <div class="product-card">
+                        <% } %>
+                        <input type="text" class="sold_quantity" value="<%= product.quantity %>" style="display: none;">
+                            <a href="/product/<%= product.slug %>">
+                                <div class="product-img">
+
+                                    <!-- Product Label start -->
+                                    <% if(product.productLabel !== null) { %> 
+                                        <div class="productLabel">
+                                            <%= product.productLabel %>
+                                        </div>
+                                    <% } %>
+                                    
+                                    <span class="discount-tag"style="opacity: 0;"><%= product.discount %>% off</span>
+                                    <img src="<%= product.thumbnail %>" class="product-thumb" alt="similar-product">
+                                    <img src="<%= product.images[0] %>" alt="similar-product-s"
+                                        class="img-fluid product-thumb-s">
+                                </div>
+                            </a>
+                            <div class="product-info">
+                                <div class="product-dets">
+                                    <a href="/product/<%= product.slug %>">
+                                            
+                                        <div class="product-name"><%= product.title %></div>
+                                    </a>
+                                    <div class="product-price">&#8377 <%= product.sellingPrice %></span>
+                                        <span class="product-price"><del>&#8377 <%= product.price %></del></span>
+                                    </div>
+
+                                    <div class="py-1">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                    </div>
+                                </div>
+
+                                <div class="card-big-btn">
+                                    <% if(user){ %>
+                                        <% if(product.quantity === 0){ %>
+                                            <button type="button" class="btn btn-outline-primary card-btn add-to-cart" disabled>Add to Cart</button>
+                                        <% }else{ %>
+                                        <button type="button" class="btn btn-outline-primary card-btn add-to-cart" onclick="add_to_cart('<%= product._id %>', '<%= product.slug %>', '<%= product.title %>', '<%= product.images[0] %>', '<%= product.quantity %>', '<%= product.price %>', '<%= product.sellingPrice %>', '<%= product.discount %>', '<%= product.color %>', '<%= user.refreshToken %>')">Add to Cart <i class="d-inline d-sm-none fa-solid fa-cart-shopping" style="color: #ffffff;" aria-hidden="true"></i></button>
+                                        <% } %>
+                                        <button type="button" class="wishlist-button-small" onclick="add_to_wishlist('<%= product._id %>', `<%= user?user._id:'' %>`)">
+                                        <i class="fa-regular fa-heart"></i>
+                                    </button>
+                                    <button type="button" class="wishlist-button-small-mob btn btn-outline-primary" onclick="add_to_wishlist('<%= product._id %>', `<%= user?user._id:'' %>`)">
+                                        <i class="fa-regular fa-heart" style="color: #132043;font-size: .9rem;" aria-hidden="true"></i></button>
+                                    <% } else { %>
+                                        <% if(product.quantity === 0){ %>
+                                            <button type="button" class="btn btn-outline-primary card-btn add-to-cart" disabled>Add to Cart</button>
+                                        <% }else{ %>
+                                        <button type="button" class="btn btn-outline-primary card-btn add-to-cart" onclick="add_to_cart('<%= product._id %>', '<%= product.slug %>', '<%= product.title %>', '<%= product.images[0] %>', '<%= product.quantity %>', '<%= product.price %>', '<%= product.color %>', ' ')">Add to Cart</button>
+                                        <% } %>
+                                        <button type="button" class="wishlist-button-small" onclick="add_to_wishlist('<%= product._id %>', `<%= user?user._id:'' %>`)">
+                                        <i class="fa-regular fa-heart"></i>
+                                    </button>
+                                    <button type="button" class="wishlist-button-small-mob btn btn-outline-primary" onclick="add_to_wishlist('<%= product._id %>', `<%= user?user._id:'' %>`)">Add
+                                        to
+                                        Wishlist</button>
+                                    <% } %>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                
+                    <% }) %>
+                <% } %>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+        </div>
+    </section>
+
+    <section id="products" class="products">
+
+        <div class="overflow-hidden container">
+            <!-- Lower Banner -->
+            <div class="lower-banner" style="margin-bottom: 2rem;">
+                <div class="row">
+                    <div class="col-sm-12 up-to-off">
+                        <div class="off-banner">
+                            <img src="/images/Banner/Lower Banner/banner-01.webp" alt="offers" class="img-fluid w-100 first">
+                            <!-- <img src="/images/Banner/Lower Banner/banner-mob.png" alt="offers" class="img-fluid w-100 second-mob"> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="lower-hashtag">
+                        <div class="lower-hashtag-inner">
+                            <div class="col-sm-6 col-lg-6 quote text-center">
+                                <div class="hashtag-section">
+                                    <img src="/images/Banner/Lower Banner 2/lower.webp" alt="hashtag"
+                                        class="hashtag-image">
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-6 sign-up">
+                                <div class="sign-up-right">
+                                    <h2>Join us for regular updates</h2>
+                                    <p>Join the <b>Praiz</b> community to receive exclusive early access to sales,
+                                        new collections and more. Plus you'll get 10% off your first order.
+                                    </p>
+                                    <div class="sign-up-section">
+                                        <div class="email-box">
+                                            <input type="email" id="email" name="emai-id"
+                                                placeholder="Enter your email">
+                                        </div>
+                                        <div class="sign-up-button">
+                                            <button type="button" class="btn btn-success">Sign Up</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TESTIMONIAL  LG SCREEN-->
+
+                <!-- <div class="testimonial">
+                    <div class="row text-center">
+                        <div class="col-md-12"> -->
+                            <!-- Carousel wrapper -->
+                            <!-- <div id="carouselBasicExample" class="carousel slide carousel-dark"
+                                data-mdb-ride="carousel">
+                                <h5>what people say about us...</h5> -->
+                                <!-- Inner -->
+                                <!-- <div class="carousel-inner"> -->
+                                    <!-- Single item -->
+                                    <!-- <div class="carousel-item active">
+                                        <p class="lead font-italic">
+                                            "Neque cupiditate assumenda in maiores repudiandae mollitia
+                                            adipisci maiores
+                                            repudiandae mollitia consectetur"
+                                        </p>
+                                        <p class="text-muted mb-0">- Anna Morian</p>
+                                    </div> -->
+
+                                    <!-- Single item -->
+                                    <!-- <div class="carousel-item">
+                                        <p class="lead font-italic mx-4 mx-md-5">
+                                            "Neque cupiditate assumenda in maiores repudiandae mollitia
+                                            adipisci maiores
+                                            repudiandae mollitia consectetur"
+                                        </p>
+
+                                        <p class="text-muted mb-0">- Teresa May</p>
+                                    </div> -->
+
+                                    <!-- Single item -->
+                                    <!-- <div class="carousel-item">
+                                        <p class="lead font-italic mx-4 mx-md-5">
+                                            "Neque cupiditate assumenda in maiores repudiandae mollitia
+                                            adipisci maiores
+                                            repudiandae mollitia consectetur"
+                                        </p> -->
+
+                                        <!-- <p class="text-muted mb-0">- Kate Allise</p>
+                                    </div>
+                                </div> -->
+                                <!-- Inner -->
+
+                                <!-- Controls -->
+                                <!-- <button class="carousel-control-prev" type="button"
+                                    data-mdb-target="#carouselBasicExample" data-mdb-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button"
+                                    data-mdb-target="#carouselBasicExample" data-mdb-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div> -->
+                            <!-- Carousel wrapper -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <%- include('footer') -%>
