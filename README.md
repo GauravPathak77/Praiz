@@ -1,6 +1,6 @@
 # 🛍️ PRAIZ - E-Commerce Website
 
-Welcome to **PRAIZ**, a fully functional e-commerce platform built using **Node.js** and **MongoDB** for the backend, and **VanillaJS** for the frontend. This project demonstrates a scalable and modular approach to building an end-to-end online shopping experience.
+Welcome to **PRAIZ**, a fully functional e-commerce platform built using **Node.js** and **MongoDB** for the backend, and **EJS** for the frontend. This project demonstrates a scalable and modular approach to building an end-to-end online shopping experience.
 
 ## 🚀 Features
 
@@ -25,20 +25,22 @@ Welcome to **PRAIZ**, a fully functional e-commerce platform built using **Node.
 .
 ├── config/
 ├── controllers/
+├── middlewares/
 ├── models/
+├── public/
 ├── routes/
 ├── utils/
+├── Views/
 ├── index.js         # Starting point of the application
 └── .env             # Environment variables (Not included for security)
 
 ```
 
 ## 🛠️ Getting Started
-- Clone the repository
+ Clone the repository
 
 ```bash
-git clone https://github.com/your-username/praiz-backend.git
-cd praiz-backend
+git clone https://github.com/GauravPathak77/Praiz
 ```
 ## Install dependencies
 ```bash
